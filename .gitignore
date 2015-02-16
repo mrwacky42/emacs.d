@@ -6,3 +6,5 @@ session.*
 url
 var
 /tramp
+/.mc-lists.el
+/etc/
