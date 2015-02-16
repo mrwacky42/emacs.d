@@ -304,9 +304,11 @@ re-downloaded in order to locate PACKAGE."
 (use-package yaml-mode
   :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
-;; Fix me to be correct besides on Fedora.
 (use-package markdown-mode
-  :config (set-variable 'markdown-command "/usr/bin/markdown2"))
+  :ensure
+  :config
+  (cond
+   ((file-executable-p "/usr/bin/markdown2") (set-variable 'markdown-command "/usr/bin/markdown2"))))
 
 ;; (use-package flymake-cursor
 ;;   :ensure)
