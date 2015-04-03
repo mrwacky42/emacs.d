@@ -281,7 +281,7 @@ re-downloaded in order to locate PACKAGE."
 (use-package smex
   :ensure
   :config (smex-initialize)
-  :pre-load (setq smex-save-file (concat emacs-etc ".smex-items"))
+  :init (setq smex-save-file (concat emacs-etc ".smex-items"))
   :bind (("M-x" . smex)
          ("C-c x" . smex)))
 
