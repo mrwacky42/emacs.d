@@ -231,7 +231,7 @@ re-downloaded in order to locate PACKAGE."
 (use-package init-isearch)
 (use-package init-windows)
 (use-package init-sessions)
-;;(use-package init-python)
+(use-package init-python)
 
 
 ;;
