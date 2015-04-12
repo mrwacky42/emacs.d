@@ -242,6 +242,8 @@ re-downloaded in order to locate PACKAGE."
 (use-package init-puppet)
 (use-package init-fonts)
 
+(use-package init-perl)
+
 
 ;;
 (use-package php-mode
