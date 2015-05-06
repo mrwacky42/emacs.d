@@ -5,7 +5,9 @@
 (use-package magit
   :ensure
   :bind ("C-c g" . magit-status)
-  :config (fullframe magit-status magit-mode-quit-window))
+  :config (progn
+            (fullframe magit-status magit-mode-quit-window)
+            (setq magit-last-seen-setup-instructions "1.4.0")))
 
 (use-package git-blame
   :ensure)
