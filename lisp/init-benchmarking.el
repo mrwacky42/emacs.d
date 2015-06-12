@@ -1,4 +1,10 @@
+;;; init-benchmarking --- Borrow from sanityinc
+;;; Commentary:
+;;; Summary:
+;;; Code:
+
 (defun sanityinc/time-subtract-millis (b a)
+  "Do math with B and A."
   (* 1000.0 (float-time (time-subtract b a))))
 
 
@@ -7,7 +13,7 @@
 LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
 
 (defadvice require
-  (around build-require-times (feature &optional filename noerror) activate)
+    (around build-require-times (feature &optional filename noerror) activate)
   "Note in `sanityinc/require-times' the time taken to require each feature."
   (let* ((already-loaded (memq feature features))
          (require-start-time (and (not already-loaded) (current-time))))
@@ -15,11 +21,9 @@ LOAD-DURATION is the time taken in milliseconds to load FEATURE.")
         ad-do-it
       (when (and (not already-loaded) (memq feature features))
         (add-to-list 'sanityinc/require-times
-                     (cons feature
-                           (sanityinc/time-subtract-millis (current-time)
-                                                           require-start-time))
-                     t)))))
+                     (cons feature (sanityinc/time-subtract-millis (current-time) require-start-time)) t)))))
 
 
 
 (provide 'init-benchmarking)
+;;; init-benchmarking.el ends here

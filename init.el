@@ -1,9 +1,12 @@
+;;; init ---  Configure emacs
+;;; Commentary:
 ;; The astute observer will notice that I've borrowed plenty from
 ;; https://github.com/purcell/emacs.d
 ;; https://github.com/rejeep/emacs
 ;;
 
-;;
+;;; Code:
+
 (mapc
  (lambda (mode)
    (when (fboundp mode)
@@ -23,31 +26,34 @@
 
 (random t) ;; Seed the random-number generator
 
-(setq backup-by-copying t ;; Set backups to not hose sym/hard links
+(setq auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
+      backup-by-copying t ;; Set backups to not hose sym/hard links
+      backup-directory-alist `(("." . ,(concat emacs-etc "backups")))
       color-theme-is-global t
       column-number-mode t
       diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain
+      inhibit-startup-echo-area-message t
       inhibit-startup-message t
       line-number-mode t
       mouse-yank-at-point t
+      oddmuse-directory (concat emacs-etc "oddmuse")
+      require-final-newline t
       save-interprogram-paste-before-kill t
+      save-place-file (concat emacs-etc "places")
       sentence-end-double-space nil
       shift-select-mode nil
+      visible-bell t
       whitespace-line-column 80
       whitespace-style '(face trailing lines-tail tabs)
-      visible-bell t
-      oddmuse-directory (concat emacs-etc "oddmuse")
-      save-place-file (concat emacs-etc "places")
-      backup-directory-alist `(("." . ,(concat emacs-etc "backups")))
-      auto-save-list-file-prefix (concat emacs-etc "auto-save-list"))
+      )
+
+(blink-cursor-mode 1)
+
 ;; (setq-default c-basic-offset 4)
 
 
 (load-theme 'misterioso)
-;(add-to-list 'load-path "~/git/emacs-color-theme-solarized")
-;(require 'color-theme-solarized)
-;(color-theme-solarized-dark)
 
 ;; Bootstrappin'
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
@@ -76,10 +82,10 @@
   (setq package-check-signature (when (executable-find "gpg") 'allow-unsigned)))
 
 (sanityinc/package-maybe-enable-signatures)
-;(after-load 'init-exec-path
-;  (sanityinc/package-maybe-enable-signatures))
 
-;(package-refresh-contents)
+;; (after-load 'init-exec-path
+;;  (sanityinc/package-maybe-enable-signatures))
+;;(package-refresh-contents)
 
 
 ;;; On-demand installation of packages
@@ -130,13 +136,13 @@ re-downloaded in order to locate PACKAGE."
 
 
 (use-package uniquify
-             :config
-             (setq
-              uniquify-buffer-name-style 'reverse
-              uniquify-separator ":"
-              uniquify-after-kill-buffer-p t      ; rename after killing dupes
-              uniquify-ignore-buffers-re "^\\*"; don't muck with special buffers
-              ))
+  :config
+  (setq
+   uniquify-buffer-name-style 'reverse
+   uniquify-separator ":"
+   uniquify-after-kill-buffer-p t      ; rename after killing dupes
+   uniquify-ignore-buffers-re "^\\*"; don't muck with special buffers
+   ))
 
 (use-package multiple-cursors
   :ensure
@@ -164,8 +170,8 @@ re-downloaded in order to locate PACKAGE."
   :bind ("%" . match-paren))
 
 (use-package fullframe
-	     :ensure
-	     :config (fullframe list-packages quit-window))
+  :ensure
+  :config (fullframe list-packages quit-window))
 
 ;; (use-package diff-hl
 ;;   :ensure
@@ -201,13 +207,13 @@ re-downloaded in order to locate PACKAGE."
                   scroll-preserve-screen-position t)))
 
 
-;; (use-package flycheck
-;;   :ensure
-;;   :init (add-hook 'after-init-hook 'global-flycheck-mode)
-;;   :config (setq
-;;            flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-;;            flycheck-idle-change-delay 0.8
-;;            flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
+(use-package flycheck
+  :ensure
+  :init (add-hook 'after-init-hook 'global-flycheck-mode)
+  :config (setq
+           flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+           flycheck-idle-change-delay 0.8
+           flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 
 
 (recentf-mode 1)
@@ -219,19 +225,22 @@ re-downloaded in order to locate PACKAGE."
 (use-package wacky-starter-kit)
 (use-package wacky-starter-kit-lisp)
 (use-package wacky-starter-kit-bindings)
+;; (use-package wacky-starter-kit-js)
 
 (use-package update-dns)
 (use-package wacky-defuns)
 (use-package misc)
-
 
-;; Modified bits of https://github.com/purcell/emacs.d
+;; Many of the init-* are modified parts of https://github.com/purcell/emacs.d
+;; Others just follow this pattern.
 (use-package init-git)
 (use-package init-isearch)
 (use-package init-windows)
 (use-package init-sessions)
 (use-package init-python)
 (use-package init-json)
+(use-package init-puppet)
+(use-package init-fonts)
 
 
 ;;
@@ -239,7 +248,11 @@ re-downloaded in order to locate PACKAGE."
   :ensure)
 (use-package web-mode
   :ensure)
-
+(use-package editorconfig
+  :ensure)
+(use-package terraform-mode
+  :ensure
+  :config (setq terraform-indent-level 4))
 
 ;; attic
 
@@ -263,14 +276,16 @@ re-downloaded in order to locate PACKAGE."
           (ido-everywhere t))
   :config
   (progn
-     (setq ido-enable-prefix nil
-          ido-enable-flex-matching t
-          ido-auto-merge-work-directories-length nil
-          ido-create-new-buffer 'always
-          ido-use-filename-at-point 'guess
-          ido-use-virtual-buffers t
-          ido-handle-duplicate-virtual-buffers 2
-          ido-max-prospects 10)
+    (setq
+     ido-auto-merge-work-directories-length nil
+     ido-create-new-buffer 'always
+     ido-enable-flex-matching t
+     ido-enable-prefix nil
+     ido-handle-duplicate-virtual-buffers 2
+     ido-max-prospects 10
+     ido-use-filename-at-point 'guess ;; or nil if this gets annoying.
+     ido-use-virtual-buffers t
+     )
     (add-to-list 'ido-ignore-files "\\.DS_Store"))) ;; Move this to OSX specific section.
 
 (use-package ido-ubiquitous
@@ -324,13 +339,16 @@ re-downloaded in order to locate PACKAGE."
 
 (if (string< emacs-version "24.4")
     (message "Package 'paradox' requires emacs 24.4 or newer. Skipping...")
-    (use-package paradox
-      :ensure
-      :config
-      (progn
-        (use-package async :ensure)
-        (paradox-enable)
-        (setq paradox-execute-asynchronously t))))
+  (use-package paradox
+    :ensure
+    :config
+    (progn
+      (use-package async :ensure)
+      (paradox-enable)
+      (setq paradox-execute-asynchronously t))))
+
+(when *is-a-mac*
+  (use-package init-osx))
 
 ;; (defun load-local (file)
 ;;   (load (f-expand file user-emacs-directory)))
@@ -338,5 +356,10 @@ re-downloaded in order to locate PACKAGE."
 ;; (load-local "defuns")
 ;; (load-local "misc")
 ;; (load-local "launcher")
-;; (when (eq system-type 'darwin)
-;;   (load-local "osx"))
+
+(provide 'init)
+
+;; Local Variables:
+;; coding: utf-8
+;; no-byte-compile: t
+;; End:

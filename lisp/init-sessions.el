@@ -1,8 +1,12 @@
 ;; save a list of open files..
-(setq desktop-path (list emacs-etc)
-      desktop-auto-save-timeout 600)
+(use-package desktop
+  :init (desktop-save-mode)
+  :config (progn
+            (setq desktop-path (list emacs-etc)
+                  desktop-auto-save-timeout 600)
+            (dolist (mode '(magit-mode git-commit-mode))
+              (add-to-list 'desktop-modes-not-to-save mode))))
 
-(desktop-save-mode 1)
 (defadvice desktop-read (around trace-desktop-errors activate)
   (let ((debug-on-error t))
     ad-do-it))

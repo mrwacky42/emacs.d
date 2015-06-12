@@ -39,7 +39,7 @@
 
 ;;; Code borrowed directly from Emacs Starter Kit.
 ;;; I removed a bunch of stuff that I either didn't like, or configured differently elsewhere
-;;; 
+;;;
 ;;; starter-kit-defuns
 (defun esk-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t)
@@ -70,9 +70,9 @@
 
 
 (defun esk-paredit-nonlisp ()
-  "Turn on paredit mode for non-lisps." 
+  "Turn on paredit mode for non-lisps."
   (interactive)
-  (set (make-local-variable 'paredit-space-for-delimiter-predicates)                                            
+  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
        '((λ (endp delimiter) nil)))
   (paredit-mode 1))
 
@@ -114,6 +114,11 @@
 (show-paren-mode 1)
 
 (require 'ffap)
+
+;; https://github.com/technomancy/emacs-starter-kit/issues/39
+;; What a stupid default.
+(setq ffap-machine-p-known 'reject)
+
 (defvar ffap-c-commment-regexp "^/\\*+"
   "Matches an opening C-style comment, like \"/***\".")
 

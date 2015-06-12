@@ -8,3 +8,7 @@ var
 /tramp
 /.mc-lists.el
 /etc/
+/recentf
+/ido.last
+/.#ido.last
+/ac-comphist.dat

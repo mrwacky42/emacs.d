@@ -16,5 +16,5 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Do not blink cursor
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 

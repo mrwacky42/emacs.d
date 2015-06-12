@@ -13,13 +13,20 @@
 
 (autoload 'espresso-mode "espresso" "Start espresso-mode" t)
 
-(add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
 (add-hook 'espresso-mode-hook 'moz-minor-mode)
 (add-hook 'espresso-mode-hook 'turn-on-paredit)
 (add-hook 'espresso-mode-hook 'run-starter-kit-coding-hook)
 ;; (add-hook 'espresso-mode-hook 'idle-highlight)
+
+;; (use-package flymake-jshint
+;;   :ensure)
+
+(add-hook 'js-mode-hook 'flycheck-mode)
+
 (setq espresso-indent-level 2)
+
 (defun starter-kit-pp-json ()
   "Pretty-print the json object following point."
   (interactive)
@@ -29,5 +36,8 @@
     (delete-region (point-min) (point-max))
     (insert (pp json-object))
     (goto-char (point-min))))
+
+(use-package coffee-mode
+  :ensure)
 
 (provide 'wacky-starter-kit-js)

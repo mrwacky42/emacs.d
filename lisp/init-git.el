@@ -7,7 +7,8 @@
   :bind ("C-c g" . magit-status)
   :config (progn
             (fullframe magit-status magit-mode-quit-window)
-            (setq magit-last-seen-setup-instructions "1.4.0")))
+            (setq magit-last-seen-setup-instructions "1.4.0"
+                  magit-auto-revert-mode nil)))
 
 (use-package git-blame
   :ensure)
@@ -104,6 +105,8 @@
 ;;   :bind "C-x v p" . #'git-messenger:popup-message)
 ;; ;(global-set-key (kbd "C-x v p") )
 
+(use-package gist
+  :ensure)
 
 (provide 'init-git)
 ;;; init-git.el ends here

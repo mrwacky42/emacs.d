@@ -5,6 +5,7 @@
   (indent-region (point-min) (point-max))
   (delete-trailing-whitespace))
 
+(defalias 'dtw 'delete-trailing-whitespace)
 
 
 ;; re-builder functions from http://www.emacswiki.org/emacs/ReBuilder
