@@ -295,20 +295,23 @@ re-downloaded in order to locate PACKAGE."
             (fullframe ibuffer ibuffer-quit)
             (setq ibuffer-show-empty-filter-groups nil)))
 
-
 ;; (use-package diff-hl
 ;;   :ensure
 ;;   :init (global-diff-hl-mode)
 ;;   :config (add-hook 'vc-checkin-hook 'diff-hl-update))
 
+
 (use-package yaml-mode
   :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
 (use-package markdown-mode
   :ensure
   :config
-  (cond
-   ((file-executable-p "/usr/bin/markdown2") (set-variable 'markdown-command "/usr/bin/markdown2"))))
+  (progn
+    (setq markdown-command "pandoc --smart -f markdown -t html")
+    (add-hook 'markdown-mode-hook
+              (lambda ()
+                (flyspell-mode t)))))
 
 ;; (use-package flymake-cursor
 ;;   :ensure)
