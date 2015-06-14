@@ -16,7 +16,8 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (when (string= (buffer-name) "*scratch*")
-              (animate-string ";; Mr Wacky Heavy Industries is online!!" (/ (frame-height) 2)))))
+              (animate-string ";; Mr Wacky Heavy Industries is online!!" (/ (frame-height) 2))
+              (goto-line 4))))
 
 ;; Strive for less clutter in user-emacs-directory
 (setq emacs-etc (concat user-emacs-directory "etc/"))

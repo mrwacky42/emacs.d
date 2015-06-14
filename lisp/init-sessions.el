@@ -40,7 +40,9 @@
 (use-package session
   :ensure
   :init (add-hook 'after-init-hook 'session-initialize)
-  :config (setq session-save-file (concat emacs-etc ".session")))
+  :config (setq
+           session-save-file (concat emacs-etc ".session")
+           session-use-package t))
 
 
 ;; save a bunch of variables to the desktop file
