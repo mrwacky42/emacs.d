@@ -286,7 +286,7 @@ re-downloaded in order to locate PACKAGE."
      ido-enable-prefix nil
      ido-handle-duplicate-virtual-buffers 2
      ido-max-prospects 10
-     ido-use-filename-at-point 'guess ;; or nil if this gets annoying.
+     ido-use-filename-at-point nil
      ido-use-virtual-buffers t
      )
     (add-to-list 'ido-ignore-files "\\.DS_Store"))) ;; Move this to OSX specific section.
