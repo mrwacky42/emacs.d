@@ -255,7 +255,9 @@ re-downloaded in order to locate PACKAGE."
   :ensure)
 (use-package terraform-mode
   :ensure
-  :config (setq terraform-indent-level 4))
+  :config (progn
+            (setq terraform-indent-level 4)
+            (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))))
 
 ;; attic
 
@@ -330,6 +332,14 @@ re-downloaded in order to locate PACKAGE."
     (add-hook 'markdown-mode-hook
               (lambda ()
                 (flyspell-mode t)))))
+
+(use-package ssh-config-mode
+  :ensure
+  :config
+  (progn
+    (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
+    (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
+    (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)))
 
 ;; (use-package flymake-cursor
 ;;   :ensure)

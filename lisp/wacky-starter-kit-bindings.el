@@ -99,6 +99,9 @@
   ;; M-S-6 is awkward
   (global-set-key (kbd "C-c q") 'join-line)
 
+  ;; Align your code in a pretty way.
+  (global-set-key (kbd "C-x \\") 'align-regexp)
+
   ;; Activate occur easily inside isearch
   (define-key isearch-mode-map (kbd "C-o")
     (lambda () (interactive)

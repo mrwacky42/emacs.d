@@ -12,10 +12,11 @@
 
 (use-package git-blame
   :ensure)
-(use-package git-commit-mode
-  :ensure)
-(use-package git-rebase-mode
-  :ensure)
+;; (use-package git-commit-mode
+;;   :ensure)
+;; (use-package git-rebase-mode
+;;   :ensure)
+
 (use-package gitignore-mode
   :ensure)
 (use-package gitconfig-mode
