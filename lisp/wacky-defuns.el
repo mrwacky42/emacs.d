@@ -1,9 +1,13 @@
 (defun iwb ()
-  "Indent and cleanup whitespace on buffer"
+  "Indent and cleanup whitespace on buffer for major-modes where it is meaningful"
   (interactive)
-  (untabify (point-min) (point-max))
-  (indent-region (point-min) (point-max))
-  (delete-trailing-whitespace))
+  (let ((danger-modes '(yaml-mode)))
+    (if (not (memq major-mode danger-modes))
+        (progn
+          (untabify (point-min) (point-max))
+          (indent-region (point-min) (point-max))
+          (delete-trailing-whitespace))
+      (message "%s is dangerous!" major-mode))))
 
 (defalias 'dtw 'delete-trailing-whitespace)
 
