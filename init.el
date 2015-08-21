@@ -251,8 +251,19 @@ re-downloaded in order to locate PACKAGE."
   :ensure)
 (use-package web-mode
   :ensure)
+
+
+;; Somehow I cannot get the editorconfig package NOT to install when I
+;; don't want it.
+(if (executable-find "editorconfig")
+    (setq editorconfig-available t)
+  (setq editorconfig-available nil))
 (use-package editorconfig
+  :if editorconfig-available
+  :no-require t
+  :disabled t
   :ensure)
+
 (use-package terraform-mode
   :ensure
   :config (progn
