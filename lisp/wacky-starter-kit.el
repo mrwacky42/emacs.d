@@ -41,6 +41,8 @@
 ;;; I removed a bunch of stuff that I either didn't like, or configured differently elsewhere
 ;;;
 ;;; starter-kit-defuns
+;;; Code:
+
 (defun esk-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t)
   (auto-fill-mode t))
@@ -56,15 +58,18 @@
            (insert (current-kill 0)))))
 
 ;; TODO Switch to this one again
-;; http://emacsredux.com/blog/2013/04/21/edit-files-as-root/
 (defun esk-sudo-edit (&optional arg)
+  "Edit file with sudo.
+If ARG is supplied, edit that file with sudo.
+Otherwise sudo edit the current buffer.
+http://emacsredux.com/blog/2013/04/21/edit-files-as-root/"
   (interactive "p")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun esk-insert-date ()
-  "Insert a time-stamp according to locale's date and time format."
+  "Insert a timestamp according to locale's date and time format."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
@@ -89,23 +94,8 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+  )
 
-(random t) ;; Seed the random-number generator
-
-(setq visible-bell t
-      inhibit-startup-message t
-      color-theme-is-global t
-      sentence-end-double-space nil
-      shift-select-mode nil
-      mouse-yank-at-point t
-      whitespace-style '(face trailing lines-tail tabs)
-      whitespace-line-column 80
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory (concat emacs-etc "oddmuse")
-      save-place-file (concat emacs-etc "places")
-      backup-directory-alist `(("." . ,(concat emacs-etc "backups")))
-      diff-switches "-u")
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
@@ -113,26 +103,27 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
-(require 'ffap)
+(use-package ffap
+  :config
+  ;; https://github.com/technomancy/emacs-starter-kit/issues/39
+  ;; What a stupid default.
+  (setq ffap-machine-p-known 'reject)
 
-;; https://github.com/technomancy/emacs-starter-kit/issues/39
-;; What a stupid default.
-(setq ffap-machine-p-known 'reject)
+  (defvar ffap-c-commment-regexp "^/\\*+"
+    "Matches an opening C-style comment, like \"/***\".")
 
-(defvar ffap-c-commment-regexp "^/\\*+"
-  "Matches an opening C-style comment, like \"/***\".")
-
-(defadvice ffap-file-at-point (after avoid-c-comments activate)
-  "Don't return paths like \"/******\" unless they actually exist.
+  (defadvice ffap-file-at-point (after avoid-c-comments activate)
+    "Don't return paths like \"/******\" unless they actually exist.
 
 This fixes the bug where ido would try to suggest a C-style
 comment as a filename."
-  (ignore-errors
-    (when (and ad-return-value
-               (string-match-p ffap-c-commment-regexp
-                               ad-return-value)
-               (not (ffap-file-exists-string ad-return-value)))
-      (setq ad-return-value nil))))
+    (ignore-errors
+      (when (and ad-return-value
+                 (string-match-p ffap-c-commment-regexp
+                                 ad-return-value)
+                 (not (ffap-file-exists-string ad-return-value)))
+        (setq ad-return-value nil)))))
+
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
@@ -175,3 +166,5 @@ comment as a filename."
                 (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
 
 (provide 'wacky-starter-kit)
+;;; wacky-starter-kit.el ends here
+

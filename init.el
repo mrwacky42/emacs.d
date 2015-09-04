@@ -48,10 +48,7 @@
       shift-select-mode nil
       visible-bell t
       whitespace-line-column 80
-      whitespace-style '(face trailing lines-tail tabs)
-      )
-
-(blink-cursor-mode 1)
+      whitespace-style '(face trailing lines-tail tabs))
 
 ;; (setq-default c-basic-offset 4)
 
@@ -81,10 +78,11 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 
-;; If gpg cannot be found, signature checking will fail, so we
-;; conditionally enable it according to whether gpg is available. We
-;; re-run this check once $PATH has been configured
 (defun sanityinc/package-maybe-enable-signatures ()
+  "Conditionally enable package signatures.
+If gpg cannot be found, signature checking will fail, so we
+conditionally enable it according to whether gpg is available.  We
+re-run this check once $PATH has been configured"
   (setq package-check-signature (when (executable-find "gpg") 'allow-unsigned)))
 
 (sanityinc/package-maybe-enable-signatures)
@@ -246,7 +244,9 @@ re-downloaded in order to locate PACKAGE."
 (use-package init-python)
 (use-package init-json)
 (use-package init-puppet)
-(use-package init-fonts)
+
+(use-package init-fonts
+  :disabled (not *is-a-mac*))
 
 (use-package init-perl)
 
@@ -392,3 +392,4 @@ re-downloaded in order to locate PACKAGE."
 ;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:
+;;; init.el ends here
