@@ -249,6 +249,7 @@ re-downloaded in order to locate PACKAGE."
   :disabled (not *is-a-mac*))
 
 (use-package init-perl)
+(use-package init-org)
 
 
 ;;
