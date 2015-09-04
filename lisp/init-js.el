@@ -1,4 +1,4 @@
-;;; init-python --- set it up
+;;; init-js --- set it up
 ;;; Commentary:
 ;;; Partially adapted from: http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 ;;; Code:
