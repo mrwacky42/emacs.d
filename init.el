@@ -13,11 +13,13 @@
      (funcall mode -1)))
  '(menu-bar-mode tool-bar-mode scroll-bar-mode))
 
+(setq initial-scratch-message ";;")
+
 (add-hook 'emacs-startup-hook
           (lambda ()
             (when (string= (buffer-name) "*scratch*")
-              (animate-string ";; Mr Wacky Heavy Industries is online!!" (/ (frame-height) 2))
-              (goto-line 4))))
+              (animate-string ";; Mr Wacky Heavy Industries is online!!\n" 4)
+              (next-line))))
 
 ;; Strive for less clutter in user-emacs-directory
 (setq emacs-etc (concat user-emacs-directory "etc/"))
