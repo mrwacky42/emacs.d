@@ -29,9 +29,17 @@
 
 (random t) ;; Seed the random-number generator
 
-(setq auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
+
+;; backup options
+(setq
       backup-by-copying t ;; Set backups to not hose sym/hard links
       backup-directory-alist `(("." . ,(concat emacs-etc "backups")))
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
+(setq auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
       color-theme-is-global t
       column-number-mode t
       diff-switches "-u"
