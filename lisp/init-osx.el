@@ -13,7 +13,12 @@
   (mouse-wheel-mode -1)
   (dolist (multiple '("" "double-" "triple-"))
     (dolist (direction '("right" "left" "up" "down"))
-      (global-set-key (kbd (concat "<" multiple "wheel-" direction ">")) 'ignore))))
+      (global-set-key (kbd (concat "<" multiple "wheel-" direction ">")) 'ignore)))
+
+  ;; From: http://emacsredux.com/blog/2015/05/09/emacs-on-os-x/
+  ;; Although he does not say what the problem is.
+  ;; I am not a dired power user.
+  (setq insert-directory-program (executable-find "gls")))
 
 (provide 'init-osx)
 ;;; init-osx ends here
