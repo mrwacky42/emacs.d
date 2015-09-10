@@ -58,8 +58,6 @@
       whitespace-line-column 80
       whitespace-style '(face trailing lines-tail tabs))
 
-;; (setq-default c-basic-offset 4)
-
 
 (load-theme 'misterioso)
 (set-cursor-color "light gray")
