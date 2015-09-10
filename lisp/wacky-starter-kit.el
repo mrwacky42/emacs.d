@@ -83,10 +83,6 @@ http://emacsredux.com/blog/2013/04/21/edit-files-as-root/"
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-(eval-after-load "ispell"
-  '(when (executable-find ispell-program-name)
-   (add-hook 'text-mode-hook 'turn-on-flyspell)))
-
 
 ;; starter-kit-misc
 

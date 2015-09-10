@@ -249,6 +249,7 @@ re-downloaded in order to locate PACKAGE."
 (use-package init-isearch)
 (use-package init-windows)
 (use-package init-sessions)
+(use-package init-spelling)
 (use-package init-python)
 (use-package init-js)
 (use-package init-json)
@@ -354,10 +355,7 @@ re-downloaded in order to locate PACKAGE."
   :ensure
   :config
   (progn
-    (setq markdown-command "pandoc --smart -f markdown -t html")
-    (add-hook 'markdown-mode-hook
-              (lambda ()
-                (flyspell-mode t)))))
+    (setq markdown-command "pandoc --smart -f markdown -t html")))
 
 (use-package ssh-config-mode
   :ensure
