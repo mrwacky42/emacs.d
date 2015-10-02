@@ -282,7 +282,8 @@ re-downloaded in order to locate PACKAGE."
   :ensure
   :config (progn
             (setq terraform-indent-level 4)
-            (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))))
+            (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
+            (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))))
 
 ;; attic
 
