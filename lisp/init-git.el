@@ -2,13 +2,15 @@
 ;;; Commentary:
 ;;; Heavily inspired by https://github.com/purcell/emacs.d/blob/master/lisp/init-git.el
 ;;; Code:
+
 (use-package magit
   :ensure
   :bind ("C-c g" . magit-status)
   :config (progn
             (fullframe magit-status magit-mode-quit-window)
             (setq magit-last-seen-setup-instructions "1.4.0"
-                  magit-auto-revert-mode nil)))
+                  magit-auto-revert-mode nil
+                  magit-push-always-verify nil)))
 
 (use-package git-blame
   :ensure)
@@ -44,8 +46,6 @@
 
 ;; (after-load 'magit
 ;;   (fullframe magit-status magit-mode-quit-window))
-
-(add-hook 'git-commit-mode-hook 'goto-address-mode)
 
 
 ;;; When we start working on git-backed files, use git-wip if available
