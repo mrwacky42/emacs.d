@@ -159,9 +159,16 @@ re-downloaded in order to locate PACKAGE."
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)))
 
+;; The cool kids have moved to avy
+;; http://emacsredux.com/blog/2015/07/19/ace-jump-mode-is-dead-long-live-avy/
 (use-package ace-jump-mode
   :ensure
   :bind ("C-c SPC" . ace-jump-mode))
+
+;; Nifty, but not using.
+(use-package command-log-mode
+  :ensure
+  :disabled t)
 
 (use-package expand-region
   :ensure
