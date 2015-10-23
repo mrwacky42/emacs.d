@@ -359,9 +359,11 @@ re-downloaded in order to locate PACKAGE."
 
 (use-package markdown-mode
   :ensure
-  :config
-  (progn
-    (setq markdown-command "pandoc --smart -f markdown -t html")))
+  :config (setq markdown-command "pandoc --smart -f markdown -t html"))
+
+(use-package gh-md
+  :ensure
+  :config (define-key markdown-mode-map (kbd "C-c C-c p") 'gh-md-render-buffer))
 
 (use-package ssh-config-mode
   :ensure
