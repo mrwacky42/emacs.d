@@ -12,7 +12,30 @@
 
 (add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters)
 
+(setq ibuffer-saved-filter-groups
+      '(("home"
+         ("emacs-config" (or (filename . ".emacs.d")))
+         ("terraform" (or (filename . ".tf$")))
+         ("Org" (or (mode . org-mode)
+                    (filename . "OrgMode")))
+         ("Web Dev" (or (mode . html-mode)
+                        (mode . css-mode)))
+         ("Magit" (name . "\*magit"))
+         ("Tramp" (or (name . "\*tramp")
+                      (filename . "\/ssh:")))
+         ("ERC" (mode . erc-mode))
+         ("Help" (or (name . "\*Help\*")
+                     (name . "\*Apropos\*")
+                     (name . "\*info\*")))
+         ("Special" (name . "\*"))
+         )))
 
+(add-hook 'ibuffer-mode-hook
+          '(lambda ()
+             (ibuffer-auto-mode 1)
+             (ibuffer-switch-to-saved-filter-groups "home")))
+
+(setq ibuffer-show-empty-filter-groups nil)
 
 (after-load 'ibuffer
   ;; Use human readable Size column instead of original one
