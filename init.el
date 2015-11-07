@@ -203,7 +203,21 @@ re-downloaded in order to locate PACKAGE."
   :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
 (use-package yasnippet
-  :ensure)
+  :ensure
+  :config
+  (defun snippet-delete-trailing-whitespace ()
+    "Delete trailing whitespace in yasnippet definitions."
+    (save-excursion
+      (goto-char (point-min))
+      (if (re-search-forward "^# --\n" nil t)
+          (delete-trailing-whitespace (point-min) (point)))))
+
+  (defun snippet-delete-trailing-whitespace-hook ()
+    "Register snippet-delete-trailing-whitespace as a before-save-hook in snippet-mode"
+    (make-local-variable `before-save-hook)
+    (add-hook 'before-save-hook `snippet-delete-trailing-whitespace))
+
+  (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook))
 
 (use-package undo-tree
   :ensure undo-tree)
