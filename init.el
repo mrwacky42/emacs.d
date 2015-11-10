@@ -203,6 +203,7 @@ re-downloaded in order to locate PACKAGE."
 
 (use-package yasnippet
   :ensure
+  :defer t
   :config
   (defun snippet-delete-trailing-whitespace ()
     "Delete trailing whitespace in yasnippet definitions."
@@ -216,7 +217,8 @@ re-downloaded in order to locate PACKAGE."
     (make-local-variable `before-save-hook)
     (add-hook 'before-save-hook `snippet-delete-trailing-whitespace))
 
-  (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook))
+  (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook)
+  (yas-global-mode 1))
 
 (use-package undo-tree
   :ensure undo-tree)
