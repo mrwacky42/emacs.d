@@ -15,7 +15,6 @@
 (setq ibuffer-saved-filter-groups
       '(("home"
          ("emacs-config" (or (filename . ".emacs.d")))
-         ("terraform" (or (filename . ".tf$")))
          ("Org" (or (mode . org-mode)
                     (filename . "OrgMode")))
          ("Web Dev" (or (mode . html-mode)
@@ -28,6 +27,7 @@
                      (name . "\*Apropos\*")
                      (name . "\*info\*")))
          ("Special" (name . "\*"))
+         ("terraform" (or (filename . ".tf$")))
          )))
 
 (add-hook 'ibuffer-mode-hook
