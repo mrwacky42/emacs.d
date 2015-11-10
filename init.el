@@ -199,8 +199,7 @@ re-downloaded in order to locate PACKAGE."
 ;;             (add-hook 'vc-checkin-hook 'diff-hl-update)))
 
 (use-package yaml-mode
-  :ensure
-  :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+  :ensure)
 
 (use-package yasnippet
   :ensure
