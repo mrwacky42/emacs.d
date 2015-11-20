@@ -62,7 +62,7 @@
 (load-theme 'misterioso)
 (set-cursor-color "light gray")
 (blink-cursor-mode 1)
-(setq blink-cursor-interval .8)
+(setq blink-cursor-interval .4)
 
 ;; Bootstrappin'
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
