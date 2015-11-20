@@ -198,9 +198,6 @@ re-downloaded in order to locate PACKAGE."
 ;;             (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
 ;;             (add-hook 'vc-checkin-hook 'diff-hl-update)))
 
-(use-package yaml-mode
-  :ensure)
-
 (use-package yasnippet
   :ensure
   :defer t
@@ -219,6 +216,15 @@ re-downloaded in order to locate PACKAGE."
 
   (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook)
   (yas-global-mode 1))
+
+(use-package yaml-mode
+  :ensure)
+
+(use-package ansible
+  :ensure
+  :config
+  (add-hook 'yaml-mode-hook '(lambda () (ansible t)))
+  :diminish ansible)
 
 (use-package undo-tree
   :ensure undo-tree)
