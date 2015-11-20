@@ -223,7 +223,10 @@ re-downloaded in order to locate PACKAGE."
 (use-package ansible
   :ensure
   :config
-  (add-hook 'yaml-mode-hook '(lambda () (ansible t)))
+  (defun enable-ansible-mode ()
+    "Wrapper for ansible mode hook"
+    (ansible t))
+  (add-hook 'yaml-mode-hook 'enable-ansible-mode)
   :diminish ansible)
 
 (use-package undo-tree
