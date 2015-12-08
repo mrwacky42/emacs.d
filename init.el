@@ -244,7 +244,7 @@ re-downloaded in order to locate PACKAGE."
   :ensure
   :config (progn
             (setq smooth-scroll-margin 5)
-            (setq scroll-conservatively 9999
+            (setq scroll-conservatively 9999 ;; OVER 9000!
                   scroll-preserve-screen-position t)))
 
 
