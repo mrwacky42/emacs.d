@@ -14,12 +14,12 @@
 
 (setq ibuffer-saved-filter-groups
       '(("home"
-         ("emacs-config" (or (filename . ".emacs.d")))
+         ("Magit" (name . "\*magit"))
+         ("emacs-config" (filename . ".emacs.d"))
          ("Org" (or (mode . org-mode)
                     (filename . "OrgMode")))
          ("Web Dev" (or (mode . html-mode)
                         (mode . css-mode)))
-         ("Magit" (name . "\*magit"))
          ("Tramp" (or (name . "\*tramp")
                       (filename . "\/ssh:")))
          ("ERC" (mode . erc-mode))
@@ -27,8 +27,7 @@
                      (name . "\*Apropos\*")
                      (name . "\*info\*")))
          ("Special" (name . "\*"))
-         ("terraform" (or (filename . ".tf$")))
-         )))
+         ("terraform" (or (filename . ".tf$"))))))
 
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
