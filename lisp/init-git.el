@@ -8,9 +8,7 @@
   :bind ("C-c g" . magit-status)
   :config (progn
             (fullframe magit-status magit-mode-quit-window)
-            (setq magit-last-seen-setup-instructions "1.4.0"
-                  magit-auto-revert-mode nil
-                  magit-push-always-verify nil)))
+            (setq magit-revert-buffers nil)))
 
 (use-package git-blame
   :ensure)
