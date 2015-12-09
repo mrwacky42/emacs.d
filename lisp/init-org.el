@@ -16,5 +16,8 @@
 ;; (setq org-time-stamp-custom-formats '("<%Y-%m-%d>" . "<%Y-%m-%d %H:%M>"))
 ;; (setq org-display-custom-times t)
 
+;; Trying advice from here; didn't get desired results..
+;; https://emacs.stackexchange.com/questions/477/how-do-i-automatically-save-org-mode-buffers
+
 (provide 'init-org)
 ;;; init-org.el ends here
