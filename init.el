@@ -381,9 +381,6 @@ re-downloaded in order to locate PACKAGE."
   ;;   :config (add-hook 'vc-checkin-hook 'diff-hl-update))
 
   
-  (use-package yaml-mode
-    :config (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
-
   (use-package markdown-mode
     :ensure
     :config (setq markdown-command "pandoc --smart -f markdown -t html"))
@@ -394,11 +391,9 @@ re-downloaded in order to locate PACKAGE."
 
   (use-package ssh-config-mode
     :ensure
-    :config
-    (progn
-      (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
-      (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
-      (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)))
+;    :config (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
+    :mode (("\\.ssh/config\\'" . ssh-config-mode)
+           ("sshd?_config\\'"  . ssh-config-mode)))
 
   ;; (use-package flymake-cursor
   ;;   :ensure)
