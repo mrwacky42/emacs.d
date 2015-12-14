@@ -283,6 +283,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package init-sessions)
   (use-package init-spelling)
   (use-package init-python)
+  (use-package init-ibuffer)
   (use-package init-js)
   (use-package init-json)
   (use-package init-puppet)
@@ -366,15 +367,6 @@ re-downloaded in order to locate PACKAGE."
            ("C-c x" . smex)))
 
   
-  (use-package ibuffer
-    :ensure
-    :bind ("C-x C-b" . ibuffer)
-    :config (progn
-              ;; (use-package ibuffer-vc
-              ;;   :ensure)
-              (fullframe ibuffer ibuffer-quit)
-              (setq ibuffer-show-empty-filter-groups nil)))
-
   ;; (use-package diff-hl
   ;;   :ensure
   ;;   :init (global-diff-hl-mode)
