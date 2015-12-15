@@ -8,6 +8,9 @@
  '(cperl-indent-level 4)
  '(cperl-indent-parens-as-block t)
  '(magit-diff-options (quote ("--ignore-space-change" "--ignore-all-space")))
+ '(package-selected-packages
+   (quote
+    (yaml-mode web-mode use-package undo-tree terraform-mode ssh-config-mode smooth-scrolling smex session puppet-mode projectile php-mode paredit paradox nginx-mode multiple-cursors markdown-mode magit-svn magit-gh-pulls json-mode jq-mode jinja2-mode ido-ubiquitous ibuffer-vc go-mode gitignore-mode github-clone github-browse-file gitconfig-mode git-timemachine git-messenger git-blame gist gh-md fullframe frame-restore flymake-python-pyflakes flymake-puppet flymake-json flymake-jshint flymake-coffee flycheck expand-region elpy elisp-slime-nav editorconfig dynamic-fonts coffee-mode bug-reference-github anzu ansible-doc ansible ace-jump-mode)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
