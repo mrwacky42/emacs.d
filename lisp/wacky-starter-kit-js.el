@@ -27,16 +27,6 @@
 
 (setq espresso-indent-level 2)
 
-(defun starter-kit-pp-json ()
-  "Pretty-print the json object following point."
-  (interactive)
-  (require 'json)
-  (let ((json-object (save-excursion (json-read))))
-    (switch-to-buffer "*json*")
-    (delete-region (point-min) (point-max))
-    (insert (pp json-object))
-    (goto-char (point-min))))
-
 (use-package coffee-mode
   :ensure)
 
