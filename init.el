@@ -388,15 +388,14 @@ re-downloaded in order to locate PACKAGE."
                   scroll-conservatively 9999
                   scroll-preserve-screen-position t))
 
-  (if (string< emacs-version "24.4")
-      (message "Package 'paradox' requires emacs 24.4 or newer. Skipping...")
-    (use-package paradox
-      :ensure
-      :config
-      (progn
-        (use-package async :ensure)
-        (paradox-enable)
-        (setq paradox-execute-asynchronously t))))
+  (use-package paradox
+    :ensure
+    :disabled (string< emacs-version "24.4")
+    :config
+    (progn
+      (use-package async :ensure)
+      (paradox-enable)
+      (setq paradox-execute-asynchronously t)))
 
   (when *is-a-mac*
     (use-package init-osx))
