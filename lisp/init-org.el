@@ -5,7 +5,8 @@
   (setq org-agenda-files (list "~/info/orgfiles") ; default "~/.agenda_files"
         org-agenda-start-on-weekday nil
         org-default-notes-file (concat org-directory "/notes.org")
-        org-directory "~/info/orgfiles")
+        org-directory "~/info/orgfiles"
+        org-completion-use-ido t)
   (add-to-list 'org-modules 'org-habit)
   :bind
   ("C-c a" . org-agenda)

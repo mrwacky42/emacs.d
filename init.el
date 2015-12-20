@@ -337,19 +337,18 @@ re-downloaded in order to locate PACKAGE."
      ido-handle-duplicate-virtual-buffers 2
      ido-max-prospects 10
      ido-use-filename-at-point nil
-     ido-use-virtual-buffers t
-     )
+     ido-use-virtual-buffers t)
 
     ;; From: http://emacsredux.com/blog/2013/04/21/edit-files-as-root/
     (defadvice ido-find-file (after find-file-sudo activate)
       "Find file as root if necessary."
       (unless (and buffer-file-name
                    (file-writable-p buffer-file-name))
-        (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))))
+        (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-  (use-package ido-ubiquitous
-    :ensure
-    :config (ido-ubiquitous-mode t))
+    (use-package ido-ubiquitous
+      :ensure
+      :config (ido-ubiquitous-mode t)))
 
   
   (use-package smex
