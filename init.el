@@ -178,15 +178,6 @@ re-downloaded in order to locate PACKAGE."
     :ensure
     :bind ("C-=" . er/expand-region))
 
-  (use-package paredit
-    :ensure
-    :commands paredit-mode
-    :diminish paredit-mode)
-
-  (use-package elisp-slime-nav
-    :ensure
-    :diminish elisp-slime-nav-mode)
-
   (use-package match-paren
     :bind ("%" . match-paren))
 
@@ -266,10 +257,8 @@ re-downloaded in order to locate PACKAGE."
   (global-prettify-symbols-mode 1)
 
   
-  ;; My abbreviated version of the starter-kit package.
+  ;; My abbreviated/modified/smothered/covered/chunked version of the starter-kit package.
   (use-package wacky-starter-kit)
-  (use-package wacky-starter-kit-lisp)
-  (use-package wacky-starter-kit-bindings)
   ;; (use-package wacky-starter-kit-js)
 
   (use-package update-dns)
@@ -295,6 +284,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package init-perl)
   (use-package init-org)
 
+  (use-package init-lisp)
   
   ;;
   (use-package php-mode

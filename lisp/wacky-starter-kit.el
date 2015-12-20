@@ -161,6 +161,90 @@ comment as a filename."
               (unless (string-match "question" oddmuse-post)
                 (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
 
+
+(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
+(add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
+
+(defun esk-remove-elc-on-save ()
+  "If you're saving an elisp file, likely the .elc is no longer valid."
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))))
+
+(define-key emacs-lisp-mode-map (kbd "C-c v") 'eval-buffer)
+
+(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+
+;; It's all about the project.
+(global-set-key (kbd "C-c f") 'find-file-in-project)
+
+;; You know, like Readline.
+(global-set-key (kbd "C-M-h") 'backward-kill-word)
+
+;; Completion that uses many different methods to find options.
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; Turn on the menu bar for exploring new modes
+(global-set-key (kbd "C-<f10>") 'menu-bar-mode)
+
+;; Font size
+(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C--") 'text-scale-decrease)
+
+;; Use regex searches by default.
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "\C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "M-%") 'query-replace-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-M-%") 'query-replace)
+
+;; Jump to a definition in the current file. (Protip: this is awesome.)
+(global-set-key (kbd "C-x C-i") 'imenu)
+
+;; File finding
+(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
+(global-set-key (kbd "C-c y") 'bury-buffer)
+(global-set-key (kbd "C-c r") 'revert-buffer)
+
+;; Window switching. (C-x o goes to the next window)
+(windmove-default-keybindings) ;; Shift+direction
+(global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
+(global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
+
+;; Start eshell or switch to it if it's active.
+(global-set-key (kbd "C-x m") 'eshell)
+
+;; Start a new eshell even if one is active.
+(global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
+
+;; Start a regular shell if you prefer that.
+(global-set-key (kbd "C-x C-m") 'shell)
+
+;; If you want to be able to M-x without meta (phones, etc)
+(global-set-key (kbd "C-c x") 'execute-extended-command)
+
+;; Help should search more than just commands
+(define-key 'help-command "a" 'apropos)
+
+;; Should be able to eval-and-replace anywhere.
+(global-set-key (kbd "C-c e") 'esk-eval-and-replace)
+
+;; M-S-6 is awkward
+(global-set-key (kbd "C-c q") 'join-line)
+
+;; Align your code in a pretty way.
+(global-set-key (kbd "C-x \\") 'align-regexp)
+
+;; Activate occur easily inside isearch
+(define-key isearch-mode-map (kbd "C-o")
+  (lambda () (interactive)
+    (let ((case-fold-search isearch-case-fold-search))
+      (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
+
 (provide 'wacky-starter-kit)
 ;;; wacky-starter-kit.el ends here
-
