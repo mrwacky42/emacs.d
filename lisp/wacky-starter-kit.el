@@ -161,10 +161,8 @@ comment as a filename."
               (unless (string-match "question" oddmuse-post)
                 (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
 
-
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
-(add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
 (defun esk-remove-elc-on-save ()
   "If you're saving an elisp file, likely the .elc is no longer valid."

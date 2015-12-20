@@ -169,7 +169,7 @@ re-downloaded in order to locate PACKAGE."
   ;; Nifty, but not using.
   (use-package command-log-mode
     :ensure
-    :disabled t)
+    :disabled)
 
   (use-package expand-region
     :ensure
@@ -251,7 +251,8 @@ re-downloaded in order to locate PACKAGE."
   (recentf-mode 1)
   (setq recentf-max-saved-items 1000
         recentf-exclude '("/tmp/" "/ssh:"))
-  (global-prettify-symbols-mode 1)
+  (when (version< "24.4" emacs-version)
+    (global-prettify-symbols-mode 1))
 
   
   ;; My abbreviated/modified/smothered/covered/chunked version of the starter-kit package.
@@ -264,14 +265,14 @@ re-downloaded in order to locate PACKAGE."
   
   ;; Many of the init-* are modified parts of https://github.com/purcell/emacs.d
   ;; Others just follow this pattern.
-  (use-package init-fonts
-    :disabled (not *is-a-mac*))
+  (when *is-a-mac*
+    (use-package init-fonts))
   (use-package init-git)
   (use-package init-ibuffer)
   (use-package init-isearch)
   (use-package init-js)
   (use-package init-json)
-
+  (use-package init-lisp)
   (use-package init-org)
   (use-package init-perl)
   (use-package init-puppet)
@@ -280,7 +281,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package init-spelling)
   (use-package init-windows)
 
-  (use-package init-lisp)
+
   
   ;;
   (use-package php-mode
@@ -297,7 +298,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package editorconfig
     :if editorconfig-available
     :no-require t
-    :disabled t
+    :disabled
     :ensure)
 
   (use-package terraform-mode
@@ -388,14 +389,14 @@ re-downloaded in order to locate PACKAGE."
                   scroll-conservatively 9999
                   scroll-preserve-screen-position t))
 
-  (use-package paradox
-    :ensure
-    :disabled (string< emacs-version "24.4")
-    :config
-    (progn
-      (use-package async :ensure)
-      (paradox-enable)
-      (setq paradox-execute-asynchronously t)))
+  (when (version< "24.4" emacs-version)
+    (use-package paradox
+      :ensure
+      :config
+      (progn
+        (use-package async :ensure)
+        (paradox-enable)
+        (setq paradox-execute-asynchronously t))))
 
   (when *is-a-mac*
     (use-package init-osx))
@@ -404,7 +405,6 @@ re-downloaded in order to locate PACKAGE."
   ;;   (load (f-expand file user-emacs-directory)))
 
   ;; (load-local "defuns")
-  ;; (load-local "misc")
   ;; (load-local "launcher")
 
   )

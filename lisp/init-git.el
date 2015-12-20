@@ -3,19 +3,21 @@
 ;;; Heavily inspired by https://github.com/purcell/emacs.d/blob/master/lisp/init-git.el
 ;;; Code:
 
-(use-package magit
-  :ensure
-  :disabled (string< emacs-version "24.4")
-  :bind ("C-c g" . magit-status)
-  :config (progn
-            (fullframe magit-status magit-mode-quit-window)
-            (setq magit-save-some-buffers nil
-                  magit-process-popup-time 10
-                  magit-diff-refine-hunk t
-                  magit-completing-read-function 'magit-ido-completing-read)
-            ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
-            ;; quickly open magit on any one of your projects.
-            (global-set-key [(meta f12)] 'magit-status)))
+(if (version< "24.4" emacs-version)
+    (use-package magit
+      :ensure
+      :bind ("C-c g" . magit-status)
+      :config
+      (fullframe magit-status magit-mode-quit-window)
+      (setq magit-save-some-buffers nil
+            magit-process-popup-time 10
+            magit-diff-refine-hunk t
+            magit-completing-read-function 'magit-ido-completing-read)
+      ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
+      ;; quickly open magit on any one of your projects.
+      (global-set-key [(meta f12)] 'magit-status)
+      (use-package magit-svn
+        :ensure)))
 
 (use-package git-blame
   :ensure)
@@ -61,10 +63,6 @@
 
 
 
-;;; git-svn support
-(use-package magit-svn
-  :ensure)
-
 ;; (autoload 'magit-svn-enabled "magit-svn")
 ;; (defun sanityinc/maybe-enable-magit-svn-mode ()
 ;;   (when (magit-svn-enabled)

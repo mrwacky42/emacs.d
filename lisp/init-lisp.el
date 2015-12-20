@@ -16,6 +16,7 @@
 
 (use-package elisp-slime-nav
   :ensure
-  :diminish elisp-slime-nav-mode)
+  :diminish elisp-slime-nav-mode
+  :config (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
 
 (provide 'init-lisp)

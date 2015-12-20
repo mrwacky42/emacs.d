@@ -4,8 +4,8 @@
 
 ;;; Code:
 
-;; Do not pause on redisplay
-(if (string< emacs-version "24.5")
+;; Do not pause on redisplay, obsolete since 24.5.
+(if (version< emacs-version "24.5")
     (setq redisplay-dont-pause t))
 
 ;; Show keystrokes in minibuffer early
