@@ -18,5 +18,10 @@
   (append flycheck-disabled-checkers
     '(json-jsonlist)))
 
+;; probably change this to a list of javascript modes (js-mode, js2-mode, others?)
+(add-hook 'js-mode-hook
+            (lambda ()
+              (push '("function" . ?λ) prettify-symbols-alist)))
+
 (provide 'init-js)
 ;;; init-js.el ends here
