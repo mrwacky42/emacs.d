@@ -4,19 +4,22 @@
 ;;; Code:
 
 (if (version< "24.4" emacs-version)
-    (use-package magit
-      :ensure
-      :bind ("C-c g" . magit-status)
-      :config
-      (fullframe magit-status magit-mode-quit-window)
-      (setq magit-save-some-buffers nil
-            magit-process-popup-time 10
-            magit-diff-refine-hunk t
-            magit-completing-read-function 'magit-ido-completing-read)
-      ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
-      ;; quickly open magit on any one of your projects.
-      (global-set-key [(meta f12)] 'magit-status)
-      (use-package magit-svn
+    (progn (use-package magit
+             :ensure
+             :bind ("C-c g" . magit-status)
+             :config
+             (fullframe magit-status magit-mode-quit-window)
+             (setq magit-save-some-buffers nil
+                   magit-process-popup-time 10
+                   magit-diff-refine-hunk t
+                   magit-completing-read-function 'magit-ido-completing-read)
+             ;; Hint: customize `magit-repo-dirs' so that you can use C-u M-F12 to
+             ;; quickly open magit on any one of your projects.
+             (global-set-key [(meta f12)] 'magit-status)
+             (use-package magit-svn
+               :ensure))
+
+      (use-package gist
         :ensure)))
 
 (use-package git-blame
@@ -95,9 +98,6 @@
 ;;   :ensure
 ;;   :bind "C-x v p" . #'git-messenger:popup-message)
 ;; ;(global-set-key (kbd "C-x v p") )
-
-(use-package gist
-  :ensure)
 
 (provide 'init-git)
 ;;; init-git.el ends here

@@ -10,8 +10,7 @@
     ;; Disable highlight columns
     (delete 'elpy-module-highlight-indentation elpy-modules)
     (elpy-enable)
-    (elpy-use-ipython)
-    ))
+    (when (executable-find "ipython") (elpy-use-ipython))))
 
 (use-package jinja2-mode
   :ensure)
