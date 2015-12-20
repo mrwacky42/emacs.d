@@ -118,9 +118,6 @@ re-downloaded in order to locate PACKAGE."
           (package-refresh-contents)
           (require-package package min-version t)))))
 
-
-
-
   
   ;;----------------------------------------------------------------------------
   ;; Allow access from emacsclient
@@ -267,22 +264,21 @@ re-downloaded in order to locate PACKAGE."
   
   ;; Many of the init-* are modified parts of https://github.com/purcell/emacs.d
   ;; Others just follow this pattern.
-  (use-package init-git)
-  (use-package init-isearch)
-  (use-package init-windows)
-  (use-package init-sessions)
-  (use-package init-spelling)
-  (use-package init-python)
-  (use-package init-ibuffer)
-  (use-package init-js)
-  (use-package init-json)
-  (use-package init-puppet)
-
   (use-package init-fonts
     :disabled (not *is-a-mac*))
+  (use-package init-git)
+  (use-package init-ibuffer)
+  (use-package init-isearch)
+  (use-package init-js)
+  (use-package init-json)
 
-  (use-package init-perl)
   (use-package init-org)
+  (use-package init-perl)
+  (use-package init-puppet)
+  (use-package init-python)
+  (use-package init-sessions)
+  (use-package init-spelling)
+  (use-package init-windows)
 
   (use-package init-lisp)
   
@@ -374,7 +370,7 @@ re-downloaded in order to locate PACKAGE."
 
   (use-package ssh-config-mode
     :ensure
-;    :config (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
+    ;; :config (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
     :mode (("\\.ssh/config\\'" . ssh-config-mode)
            ("sshd?_config\\'"  . ssh-config-mode)))
 
