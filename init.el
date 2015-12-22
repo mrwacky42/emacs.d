@@ -304,7 +304,8 @@ re-downloaded in order to locate PACKAGE."
   (use-package terraform-mode
     :ensure
     :config (progn
-              (setq terraform-indent-level 4)
+              (setq terraform-indent-level 4
+                    hcl-indent-level 4)
               (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
               (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))))
 
