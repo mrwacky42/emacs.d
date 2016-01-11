@@ -54,7 +54,7 @@
             "Bitstream Vera Mono"
             "Courier New")
           dynamic-fonts-preferred-monospace-point-size (pcase system-type
-                                                         (`darwin 13)
+                                                         (`darwin 14)
                                                          (_ 10))
           dynamic-fonts-preferred-proportional-fonts
           '(
@@ -71,7 +71,7 @@
             "Arial Unicode MS"
             "Arial")
           dynamic-fonts-preferred-proportional-point-size (pcase system-type
-                                                            (`darwin 13)
+                                                            (`darwin 14)
                                                             (_ 10)))
 
     (dynamic-fonts-setup)))
