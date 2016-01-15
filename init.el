@@ -378,7 +378,12 @@ re-downloaded in order to locate PACKAGE."
     :ensure
     ;; :config (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
     :mode (("\\.ssh/config\\'" . ssh-config-mode)
-           ("sshd?_config\\'"  . ssh-config-mode)))
+           ("sshd?_config\\'"  . ssh-config-mode))
+    :config
+    (setq my-additional-ssh-config-words '("UseRoaming")
+          ssh-config-font-lock-keywords
+          `( ,(regexp-opt (append ssh-config-words-ssh ssh-config-words-sshd my-additional-ssh-config-words) 'words)
+             (1 font-lock-keyword-face))))
 
   ;; (use-package flymake-cursor
   ;;   :ensure)
