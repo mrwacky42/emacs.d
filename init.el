@@ -8,9 +8,6 @@
 ;;; Code:
 
 
-;; Try to avoid GC during startup
-(setq gc-cons-threshold 200000000)
-
 (mapc
  (lambda (mode)
    (when (fboundp mode)
@@ -64,7 +61,8 @@
 
 
 ;; Wrap the rest in this let to bootstrap faster perhaps
-(let ((file-name-handler-alist nil))
+(let ((file-name-handler-alist nil)
+      (gc-cons-threshold most-positive-fixnum))
   (load-theme 'misterioso)
   (set-cursor-color "light gray")
   (blink-cursor-mode 1)
@@ -413,9 +411,6 @@ re-downloaded in order to locate PACKAGE."
   ;; (load-local "launcher")
 
   )
-
-;; Back to default
-(setq gc-cons-threshold 800000)
 
 (provide 'init)
 
