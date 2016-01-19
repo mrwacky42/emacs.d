@@ -18,4 +18,9 @@
   :diminish elisp-slime-nav-mode
   :config (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
 
+;; Redundant since I disable flycheck for emacs-lisp-mode already.
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(emacs-lisp-checkdoc)))
+
 (provide 'init-lisp)

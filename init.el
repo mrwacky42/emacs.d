@@ -240,13 +240,18 @@ re-downloaded in order to locate PACKAGE."
               (setq scroll-conservatively 9999 ;; OVER 9000!
                     scroll-preserve-screen-position t)))
 
+  ;; If flycheck understood use-package syntax, for elisp, it would be
+  ;; much less annoying. But as it stands, all my emacs configs are
+  ;; littered with lint when flycheck is enabled.
+  ;; TODO: Consider only disabling flycheck for elisp in ~/.emacs.d.
   (use-package flycheck
     :ensure
     :init (add-hook 'after-init-hook 'global-flycheck-mode)
     :config (setq
              flycheck-check-syntax-automatically '(save idle-change mode-enabled)
              flycheck-idle-change-delay 0.8
-             flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
+             flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list
+             flycheck-global-modes '(not emacs-lisp-mode)))
 
   
   (recentf-mode 1)
