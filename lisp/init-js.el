@@ -13,11 +13,6 @@
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
-;; disable json-jsonlist checking for json files
-(setq-default flycheck-disabled-checkers
-  (append flycheck-disabled-checkers
-    '(json-jsonlist)))
-
 ;; probably change this to a list of javascript modes (js-mode, js2-mode, others?)
 (add-hook 'js-mode-hook
             (lambda ()
