@@ -136,7 +136,7 @@ re-downloaded in order to locate PACKAGE."
   (load custom-file :noerror)
 
   
-;;; Fire up package.el
+  ;; Fire up package.el
   (setq package-enable-at-startup nil)
   (package-initialize)
   (require-package 'use-package)
@@ -208,7 +208,10 @@ re-downloaded in order to locate PACKAGE."
     (yas-global-mode 1))
 
   (use-package yaml-mode
-    :ensure)
+    :ensure
+    :config
+    (add-hook 'yaml-mode-hook 'turn-off-flyspell)
+    (add-hook 'yaml-mode-hook 'turn-off-auto-fill))
 
   (use-package ansible
     :ensure
