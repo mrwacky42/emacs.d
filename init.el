@@ -180,6 +180,10 @@ re-downloaded in order to locate PACKAGE."
     :ensure
     :config (fullframe list-packages quit-window))
 
+  (use-package comment-dwim-2
+    :ensure
+    :bind ("M-;" . comment-dwim-2))
+
   ;; (use-package diff-hl
   ;;   :ensure
   ;;   :init (global-diff-hl-mode)
