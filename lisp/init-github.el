@@ -10,6 +10,10 @@
   (require-package 'magit-gh-pulls))
 
 (use-package gist
-  :ensure)
+  :ensure
+  :config
+  ;; When I fetch a gist, from gist-list I never seem to want to edit it.
+  ;; This moves the point right back to the gist list buffer.
+  (advice-add 'gist-fetch-current :after #'wacky/other-window))
 
 (provide 'init-github)

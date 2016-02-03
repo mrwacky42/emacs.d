@@ -61,4 +61,8 @@
    nil '(("\\<\\(FIX\\(_?ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|NOCOMMIT\\|XXX\\)"
           1 font-lock-warning-face t))))
 
+(defun wacky/other-window ()
+  "Unceremoniously switch to the other window."
+  (other-window 1))
+
 (provide 'wacky-defuns)
