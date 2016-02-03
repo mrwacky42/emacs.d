@@ -259,7 +259,7 @@ re-downloaded in order to locate PACKAGE."
 
   
   (recentf-mode 1)
-  (setq recentf-max-saved-items 1000
+  (setq recentf-max-saved-items 100
         recentf-exclude '("/tmp/" "/ssh:"))
   (when (version< "24.4" emacs-version)
     (global-prettify-symbols-mode 1))
