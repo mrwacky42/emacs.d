@@ -81,6 +81,10 @@
 
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
+(define-abbrev-table 'fortran-mode-abbrev-table
+  '(
+   ))
+
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
 (define-abbrev-table 'gfm-mode-abbrev-table '())
@@ -95,7 +99,12 @@
   '(
     ("depracated" "deprecated" nil 0)
     ("jobz" "jobs" nil 1)
+    ("recylcing" "recycling" nil 0)
    ))
+
+(define-abbrev-table 'go-mode-abbrev-table '())
+
+(define-abbrev-table 'godoc-mode-abbrev-table '())
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
