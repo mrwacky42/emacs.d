@@ -214,8 +214,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package yaml-mode
     :ensure
     :config
-    (add-hook 'yaml-mode-hook 'turn-off-flyspell)
-    (add-hook 'yaml-mode-hook 'turn-off-auto-fill))
+    (add-hook 'yaml-mode-hook 'turn-off-flyspell))
 
   (use-package ansible
     :ensure

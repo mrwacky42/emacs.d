@@ -81,7 +81,9 @@ http://emacsredux.com/blog/2013/04/21/edit-files-as-root/"
        '((λ (endp delimiter) nil)))
   (paredit-mode 1))
 
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; This gets annoying in text-modes where I do not seem to want auto-fill.
+;; I'm looking at you org-mode and yaml-mode!
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 
 ;; starter-kit-misc
