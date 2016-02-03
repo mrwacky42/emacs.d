@@ -269,9 +269,10 @@ re-downloaded in order to locate PACKAGE."
   (use-package wacky-starter-kit)
   ;; (use-package wacky-starter-kit-js)
 
-  (use-package update-dns)
   (use-package wacky-defuns)
   (use-package misc)
+  (use-package init-prelude)
+
   
   ;; Many of the init-* are modified parts of https://github.com/purcell/emacs.d
   ;; Others just follow this pattern.
@@ -350,13 +351,6 @@ re-downloaded in order to locate PACKAGE."
      ido-use-filename-at-point nil
      ido-use-virtual-buffers t)
 
-    ;; From: http://emacsredux.com/blog/2013/04/21/edit-files-as-root/
-    (defadvice ido-find-file (after find-file-sudo activate)
-      "Find file as root if necessary."
-      (unless (and buffer-file-name
-                   (file-writable-p buffer-file-name))
-        (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
-
     (use-package ido-ubiquitous
       :ensure
       :config (ido-ubiquitous-mode t)))
@@ -412,6 +406,8 @@ re-downloaded in order to locate PACKAGE."
         (use-package async :ensure)
         (paradox-enable)
         (setq paradox-execute-asynchronously t))))
+
+  (use-package update-dns)
 
   (when *is-a-mac*
     (use-package init-osx))
