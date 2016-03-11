@@ -76,5 +76,26 @@ be global."
       '(".aux" ".exe" ".log" ".meta" ".out" ".pdf" "-pkg.el" "-autoloads.el" "auto/"))
 
 
+;;; This section from
+;;; http://www.wilfred.me.uk/.emacs.d/init.html#orgheadline19
+;;; BSD licensed http://www.wilfred.me.uk/.emacs.d/init.html#orgheadline1
+;;; Copyright (c) 2012-2013, Wilfred Hughes
+(defun beginning-of-line-dwim ()
+  "Toggles between moving point to the first non-whitespace character, and
+the start of the line."
+  (interactive)
+  (let ((start-position (point)))
+    ;; Move to the first non-whitespace character.
+    (back-to-indentation)
+
+    ;; If we haven't moved position, go to start of the line.
+    (when (= (point) start-position)
+      (move-beginning-of-line nil))))
+
+(global-set-key (kbd "C-a") 'beginning-of-line-dwim)
+;;; End BSD section
+
+
+
 (provide 'misc)
 ;;; misc.el ends here
