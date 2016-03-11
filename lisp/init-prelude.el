@@ -37,5 +37,21 @@ See `file-attributes' for more info."
 ;; But it is incomplete, and this version from Prelude is better.
 (add-hook 'find-file-hook 'prelude-reopen-as-root)
 
+
+;;; http://emacsredux.com/blog/2013/03/26/smarter-open-line/
+(defun prelude-smart-open-line (arg)
+  "Insert an empty line after the current line.
+Position the cursor at its beginning, according to the current mode.
+
+With a prefix ARG open line above the current line."
+  (interactive "P")
+  (if arg
+      (prelude-smart-open-line-above)
+    (progn
+      (move-end-of-line nil)
+      (newline-and-indent))))
+(global-set-key [(shift return)] 'prelude-smart-open-line)
+
+
 (provide 'init-prelude)
 ;;; init-prelude.el ends here
