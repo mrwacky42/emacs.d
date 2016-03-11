@@ -81,9 +81,7 @@
 
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
-(define-abbrev-table 'fortran-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'fortran-mode-abbrev-table '())
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
@@ -97,7 +95,9 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("containter" "container" nil 0)
     ("depracated" "deprecated" nil 0)
+    ("isntance" "instance" nil 1)
     ("jobz" "jobs" nil 1)
     ("recylcing" "recycling" nil 0)
    ))
@@ -213,6 +213,8 @@
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
+(define-abbrev-table 'profiler-report-mode-abbrev-table '())
+
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'puppet-mode-abbrev-table '())
@@ -244,6 +246,8 @@
 (define-abbrev-table 'text-mode-abbrev-table '())
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-annotate-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-bzr-log-view-mode-abbrev-table '())
 

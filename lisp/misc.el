@@ -63,7 +63,8 @@ be global."
                    bef aft (if p "loc" "glob")))
       (user-error "No typo at or before point"))))
 
-(setq save-abbrevs 'silently)
+(setq save-abbrevs 'silently
+      abbrev-file-name (concat emacs-etc "abbrev_defs"))
 (setq-default abbrev-mode t)
 
 
