@@ -1,3 +1,18 @@
+;;; init-org --- Configure org-mode my way
+;;
+;;; Commentary:
+;;
+;; org-capture from browsers is provided by emacs-capture in ~/bin
+;; This site recommends how to set up for Chrome to use xdg-open:
+;; https://cestdiego.github.io/blog/2015/08/19/org-protocol/
+;; However, it skips the part about registering the MIME handler with xdg, but that is covered in superuser comments here:
+;; https://superuser.com/questions/162092/how-can-i-register-a-custom-protocol-with-xdg/309343#comment1336968_309343
+;; In short: xdg-mime default emacsclient.desktop x-scheme-handler/org-protocol
+;; Similarly, for Firefox, we can set the path to emacsclient to be our new `emacs-capture` tool.
+;; http://chadok.info/firefox-org-capture/
+;;
+;;; Code:
+
 (use-package org
   :defer
   :config
@@ -24,7 +39,7 @@
                                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
                                  ("j" "Journal" entry (file+datetree "~/info/orgfiles/diary.org")
                                   "* %?\n%U\n" :clock-in t :clock-resume t)
-                                 ("w" "org-protocol" entry (file "~/info/orgfiles/notes.org")
+                                 ("l" "org-protocol" entry (file "~/info/orgfiles/notes.org")
                                   "* TODO Review %c\n%U\n" :immediate-finish t)
                                  ("m" "Meeting" entry (file "~/info/orgfiles/notes.org")
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
@@ -32,6 +47,8 @@
                                   "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
                                  ("h" "Habit" entry (file "~/info/orgfiles/notes.org")
                                   "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))
+   org-capture-templates-contexts
+      '(("l" ((in-mode . "non-existent-mode"))))
    org-todo-keyword-faces (quote (("TODO" :foreground "red" :weight bold)
                                   ("NEXT" :foreground "blue" :weight bold)
                                   ("DONE" :foreground "forest green" :weight bold)
@@ -52,6 +69,19 @@
    org-treat-S-cursor-todo-selection-as-state-change nil)
 
   (add-to-list 'org-modules 'org-habit)
+
+
+  (defadvice org-capture
+      (after make-full-window-frame activate)
+    "Advise capture to be the only window when used as a popup"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
+
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-frame)))
   :bind
   ("C-c a" . org-agenda)
   ("C-c l" . org-store-link)
