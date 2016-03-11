@@ -1,7 +1,9 @@
+;; TODO consider delete-trailing-whitespace only for danger modes, or
+;; blacklist for each operation or something
 (defun iwb ()
   "Indent and cleanup whitespace on buffer for major-modes where it is meaningful"
   (interactive)
-  (let ((danger-modes '(yaml-mode)))
+  (let ((danger-modes '(yaml-mode makefile-mode)))
     (if (not (memq major-mode danger-modes))
         (progn
           (untabify (point-min) (point-max))
