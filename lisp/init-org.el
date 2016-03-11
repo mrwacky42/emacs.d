@@ -21,34 +21,35 @@
 
   (setq org-directory "~/info/orgfiles")
   (setq
-   org-agenda-files (list "~/info/orgfiles") ; default "~/.agenda_files"
+   org-agenda-files (list org-directory) ; default "~/.agenda_files"
    org-agenda-start-on-weekday nil
    org-completion-use-ido t
-   org-default-notes-file (concat org-directory "/notes.org")
+   org-default-notes-file (concat (file-name-as-directory org-directory) "notes.org")
    org-log-done (quote time)
    org-log-into-drawer t
    org-special-ctrl-a/e t
    org-special-ctrl-k t
    org-yank-adjusted-subtrees t
 
-   org-capture-templates (quote (("t" "todo" entry (file "~/info/orgfiles/notes.org")
+   org-capture-templates (quote (("t" "todo" entry (file org-default-notes-file)
                                   "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-                                 ("r" "respond" entry (file "~/info/orgfiles/notes.org")
+                                 ("r" "respond" entry (file org-default-notes-file)
                                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                                 ("n" "note" entry (file "~/info/orgfiles/notes.org")
+                                 ("n" "note" entry (file org-default-notes-file)
                                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                                 ("j" "Journal" entry (file+datetree "~/info/orgfiles/diary.org")
+                                 ("j" "Journal" entry (file+datetree (concat (file-name-as-directory org-directory) "diary.org"))
                                   "* %?\n%U\n" :clock-in t :clock-resume t)
-                                 ("l" "org-protocol" entry (file "~/info/orgfiles/notes.org")
+                                 ("l" "org-protocol" entry (file org-default-notes-file)
                                   "* TODO Review %c\n%U\n" :immediate-finish t)
-                                 ("m" "Meeting" entry (file "~/info/orgfiles/notes.org")
+                                 ("m" "Meeting" entry (file org-default-notes-file)
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                                 ("p" "Phone call" entry (file "~/info/orgfiles/notes.org")
+                                 ("p" "Phone call" entry (file org-default-notes-file)
                                   "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-                                 ("h" "Habit" entry (file "~/info/orgfiles/notes.org")
+                                 ("h" "Habit" entry (file org-default-notes-file)
                                   "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))
-   org-capture-templates-contexts
-      '(("l" ((in-mode . "non-existent-mode"))))
+
+   org-capture-templates-contexts (quote (("l" ((in-mode . "non-existent-mode")))))
+
    org-todo-keyword-faces (quote (("TODO" :foreground "red" :weight bold)
                                   ("NEXT" :foreground "blue" :weight bold)
                                   ("DONE" :foreground "forest green" :weight bold)
@@ -57,8 +58,10 @@
                                   ("CANCELLED" :foreground "forest green" :weight bold)
                                   ("MEETING" :foreground "forest green" :weight bold)
                                   ("PHONE" :foreground "forest green" :weight bold)))
+
    org-todo-keywords (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
                              (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING")))
+
    org-todo-state-tags-triggers (quote (("CANCELLED" ("CANCELLED" . t))
                                         ("WAITING" ("WAITING" . t))
                                         ("HOLD" ("WAITING") ("HOLD" . t))
@@ -66,10 +69,16 @@
                                         ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
                                         ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                                         ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))
+
    org-treat-S-cursor-todo-selection-as-state-change nil)
 
   (add-to-list 'org-modules 'org-habit)
 
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (sh . t)))
 
   (defadvice org-capture
       (after make-full-window-frame activate)
