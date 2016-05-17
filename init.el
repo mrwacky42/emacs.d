@@ -49,7 +49,6 @@
       inhibit-startup-message t
       line-number-mode t
       mouse-yank-at-point t
-      oddmuse-directory (concat emacs-etc "oddmuse")
       require-final-newline t
       save-interprogram-paste-before-kill t
       save-place-file (concat emacs-etc "places")
