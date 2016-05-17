@@ -267,7 +267,8 @@ re-downloaded in order to locate PACKAGE."
   (use-package wacky-starter-kit)
   ;; (use-package wacky-starter-kit-js)
 
-  (use-package wacky-defuns)
+  (use-package wacky-defuns
+    :bind ("C-z" . maybe-suspend-frame))
   (use-package misc)
   (use-package init-prelude)
 

@@ -67,4 +67,11 @@
   "Unceremoniously switch to the other window."
   (other-window 1))
 
+(defun maybe-suspend-frame ()
+  "Only suspend in TTY mode"
+  (interactive)
+  (if (window-system)
+      (message "Use C-x C-z to suspend-frame")
+    (suspend-frame)))
+
 (provide 'wacky-defuns)
