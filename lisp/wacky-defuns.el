@@ -9,7 +9,9 @@
           (untabify (point-min) (point-max))
           (indent-region (point-min) (point-max))
           (delete-trailing-whitespace))
-      (message "%s is dangerous!" major-mode))))
+      (progn
+        (delete-trailing-whitespace)
+        (message "%s is dangerous!" major-mode)))))
 
 (defalias 'dtw 'delete-trailing-whitespace)
 
