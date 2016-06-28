@@ -37,6 +37,7 @@
 (use-package git-messenger ;; Though see also vc-annotate's "n" & "p" bindings
   :ensure)
 (use-package git-timemachine
+  :commands git-timemachine
   :ensure)
 
 ;; (after-load 'magit
