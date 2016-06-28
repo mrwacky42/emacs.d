@@ -213,7 +213,12 @@ re-downloaded in order to locate PACKAGE."
   (use-package yaml-mode
     :ensure
     :config
-    (add-hook 'yaml-mode-hook 'turn-off-flyspell))
+    (add-hook 'yaml-mode-hook 'turn-off-flyspell)
+    :bind (:map yaml-mode-map
+                ("C-c h a" . ansible-doc)))
+
+  (use-package ansible-doc
+    :ensure)
 
   (use-package ansible
     :ensure
@@ -375,7 +380,9 @@ re-downloaded in order to locate PACKAGE."
 
   (use-package gh-md
     :ensure
-    :config (define-key markdown-mode-map (kbd "C-c C-c p") 'gh-md-render-buffer))
+    :bind (:map markdown-mode-map
+                ("C-c C-c p" . gh-md-render-buffer))
+    :command gh-md-render-buffer)
 
   (use-package ssh-config-mode
     :ensure
