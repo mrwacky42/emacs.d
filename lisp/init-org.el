@@ -48,7 +48,10 @@
                                  ("h" "Habit" entry (file org-default-notes-file)
                                   "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))
 
-   org-capture-templates-contexts (quote (("l" ((in-mode . "non-existent-mode")))))
+   ;; org-capture Firefox plugin will not work if this is set.
+   ;; I have been unable to figure out a context that works with the
+   ;; plugin, but not interactively
+   ;; org-capture-templates-contexts (quote (("l" ((in-mode . "non-existent-mode")))))
 
    org-todo-keyword-faces (quote (("TODO" :foreground "red" :weight bold)
                                   ("NEXT" :foreground "blue" :weight bold)
