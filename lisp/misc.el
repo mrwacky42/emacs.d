@@ -14,7 +14,13 @@
 ;; Set default browser
 ;; On Mac, in case default isn't what we want:
 ;; (setq browse-url-generic-program (expand-file-name "~/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"))
-(cond (*is-a-mac* (setq browse-url-browser-function 'browse-url-default-macosx-browser))
+(defun wacky/browse-url-default-macosx-browser (url &optional _new-window)
+  "Invoke the MacOS X system's default Web browser, incognito.
+The optional NEW-WINDOW argument is not used.  It had better be Chrome or Chromium"
+  (interactive (browse-url-interactive-arg "URL: "))
+  (start-process (concat "open " url " --incognito") nil "open" url))
+
+(cond (*is-a-mac* (setq browse-url-browser-function 'wacky/browse-url-default-macosx-browser))
       (t (progn (setq browse-url-browser-function 'browse-url-generic)
                 (setq browse-url-generic-program "chromium-browser"))))
 (setq browse-url-generic-args (list "--incognito"))
