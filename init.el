@@ -132,7 +132,7 @@ re-downloaded in order to locate PACKAGE."
 
   (setq custom-file
         (concat (expand-file-name user-emacs-directory) "custom.el"))
-  (load custom-file :noerror)
+  (load custom-file :noerror :nomessage)
 
   
   ;; Fire up package.el
@@ -416,7 +416,6 @@ re-downloaded in order to locate PACKAGE."
 
   ;; (load-local "defuns")
   ;; (load-local "launcher")
-
   )
 
 (provide 'init)
