@@ -382,7 +382,7 @@ re-downloaded in order to locate PACKAGE."
     :ensure
     :bind (:map markdown-mode-map
                 ("C-c C-c p" . gh-md-render-buffer))
-    :command gh-md-render-buffer)
+    :commands gh-md-render-buffer)
 
   (use-package ssh-config-mode
     :ensure
