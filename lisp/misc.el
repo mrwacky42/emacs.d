@@ -39,8 +39,9 @@ The optional NEW-WINDOW argument is not used.  It had better be Chrome or Chromi
 (defun my-minibuffer-exit-hook ()
   (setq gc-cons-threshold default-gc-cons-threshold))
 
-(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+;; Disabled 2016-05-09
+;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+;; (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
 
 
 ;; http://endlessparentheses.com/ispell-and-abbrev-the-perfect-auto-correct.html
@@ -102,6 +103,8 @@ the start of the line."
 (global-set-key (kbd "C-a") 'beginning-of-line-dwim)
 ;;; End BSD section
 
+
+(global-set-key (kbd "M-SPC") 'cycle-spacing)
 
 
 (provide 'misc)
