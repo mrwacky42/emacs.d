@@ -1,0 +1,22 @@
+# -*- mode: snippet; -*-
+# name: aws_instance
+# key: aws_instance
+# binding: direct-keybinding
+# --
+resource "aws_instance" "${1:resource name}" {
+    ami = "\${terraform_remote_state.core.output.ami_stable}"
+    count = "\${var.instance_count}"
+    instance_type = "\${var.instance_type}"
+    subnet_id = "\${element(split(\",\",terraform_remote_state.core.output.dedicatedsubnets), count.index)}"
+
+    user_data = "\${element(template_file.user-data.*.rendered, count.index)}"
+
+    #Instance tags
+    tags {
+        "Name" = "\${var.role_name} \${var.environment} server \${count.index}"
+        "environment" = "\${var.environment}"
+        "role" = "\${var.role_name}"
+        "instance" = "\${count.index}"
+    }
+    $0
+}

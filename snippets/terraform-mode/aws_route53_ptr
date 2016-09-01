@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: aws_route53_ptr
+# key: ptr
+# binding: direct-keybinding
+# --
+resource "aws_route53_record" "$1-PTR-by-instance" {
+   zone_id = "\${var.networkprefix_inaddr_arpa_zone_id}"
+   count = "\${var.instance_count}"
+   name = "\${element(split(".", element(aws_instance.$1.*.private_ip,count.index)), 3)}.\${element(split(".", element(aws_instance.$1.*.private_ip,count.index)), 2)}.\${var.networkprefix_inaddr_arpa}"
+   type = "PTR"
+   ttl = "30"
+   # Don't duplicate assembled DNS record names, instead, reference the name attribute of the correct A-record:
+   records = ["\${element(aws_route53_record.$1-by-instance.*.name, count.index)}."]  # trailing '.' is correct
+}
+$0
