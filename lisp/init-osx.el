@@ -14,6 +14,10 @@
   (dolist (direction '("right" "left" "up" "down"))
     (global-set-key (kbd (concat "<" multiple "wheel-" direction ">")) 'ignore)))
 
+;; gpg2 insists on using pinentry outside of emacs, force gpg1 until gpg-agent is solved.
+(when (file-executable-p "/usr/local/bin/gpg1")
+  (setq epg-gpg-program "/usr/local/bin/gpg1"))
+
 ;; vbell is broken in HomeBrew Emacs 24.x
 (when (version< emacs-version "25")
   (setq visible-bell nil)
