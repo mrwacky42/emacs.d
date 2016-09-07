@@ -17,7 +17,10 @@
 ;; From: http://emacsredux.com/blog/2015/05/09/emacs-on-os-x/
 ;; Although he does not say what the problem is.
 ;; I am not a dired power user.
-(setq insert-directory-program (executable-find "gls"))
+(let ((gls (executable-find "gls")))
+  (if gls
+      (setq insert-directory-program gls)
+    (message "gls is not found, 'brew install coreutils'")))
 
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
