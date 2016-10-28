@@ -45,6 +45,7 @@
       column-number-mode t
       diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain
+      epa-armor t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t
       line-number-mode t
