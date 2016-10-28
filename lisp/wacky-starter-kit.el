@@ -69,10 +69,9 @@ http://emacsredux.com/blog/2013/04/21/edit-files-as-root/"
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun esk-insert-date ()
-  "Insert a timestamp according to locale's date and time format."
+  "Insert an epoch timestamp according to locale's date and time format."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
-
 
 (defun esk-paredit-nonlisp ()
   "Turn on paredit mode for non-lisps."
