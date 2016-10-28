@@ -15,6 +15,11 @@
                    magit-process-popup-time 10
                    magit-revert-buffers nil
                    magit-save-some-buffers nil)
+             ;; Recenter when moving forward in magit-diffs. This way
+             ;; we always can see as much of the diff as possible.
+             (defadvice magit-section-forward (after magit-section-forward-before-advice activate)
+               (recenter-top-bottom 0))
+
              (use-package magit-svn
                :ensure))
 
