@@ -84,4 +84,14 @@
         (bury-buffer)
       ad-do-it)))
 
+(defun insert-iso-date (prefix)
+    "Insert the current ISO date stamp. With prefix-arguments, prints more and more detail."
+    (interactive "P")
+    (let ((format (cond
+                   ((not prefix) "%F")
+                   ((equal prefix '(4)) "%FT%T")
+                   ((equal prefix '(16)) "%FT%T%z")
+                   ((equal prefix '(64)) "%FT%T%N%z"))))
+      (insert (format-time-string format))))
+
 (provide 'wacky-defuns)
