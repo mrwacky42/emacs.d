@@ -41,6 +41,8 @@
                                   "* %?\n%U\n" :clock-in t :clock-resume t)
                                  ("l" "org-protocol" entry (file org-default-notes-file)
                                   "* TODO Review %c\n%U\n" :immediate-finish t)
+                                 ("L" "Firefox capture" entry (file+headline org-default-notes-file "Captured from web for review") "* TODO Review %c\n%U\n" :immediate-finish t)
+
                                  ("m" "Meeting" entry (file org-default-notes-file)
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
                                  ("p" "Phone call" entry (file org-default-notes-file)
