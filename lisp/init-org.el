@@ -4,13 +4,15 @@
 ;;
 ;; org-capture from browsers is provided by emacs-capture in ~/bin
 ;; This site recommends how to set up for Chrome to use xdg-open:
-;; https://cestdiego.github.io/blog/2015/08/19/org-protocol/
+;; http://www.diegoberrocal.com/blog/2015/08/19/org-protocol/
 ;; However, it skips the part about registering the MIME handler with xdg, but that is covered in superuser comments here:
 ;; https://superuser.com/questions/162092/how-can-i-register-a-custom-protocol-with-xdg/309343#comment1336968_309343
 ;; In short: xdg-mime default emacsclient.desktop x-scheme-handler/org-protocol
 ;; Similarly, for Firefox, we can set the path to emacsclient to be our new `emacs-capture` tool.
 ;; http://chadok.info/firefox-org-capture/
-;;
+;; For Chrome, we're now using https://github.com/sprig/org-capture-extension which has good instructions as well.
+;; See also:
+;; http://orgmode.org/worg/org-contrib/org-protocol.html
 ;;; Code:
 
 (use-package org
