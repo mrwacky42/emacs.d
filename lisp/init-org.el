@@ -19,12 +19,12 @@
   (use-package org-habit)
   (use-package org-protocol)
 
-  (setq org-directory "~/info/orgfiles")
+  (setq org-directory "~/info/orgfiles/")
   (setq
    org-agenda-files (list org-directory) ; default "~/.agenda_files"
    org-agenda-start-on-weekday nil
    org-completion-use-ido t
-   org-default-notes-file (concat (file-name-as-directory org-directory) "notes.org")
+   org-default-notes-file (concat org-directory "notes.org")
    org-log-done (quote time)
    org-log-into-drawer t
    org-special-ctrl-a/e t
@@ -37,16 +37,18 @@
                                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
                                  ("n" "note" entry (file org-default-notes-file)
                                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                                 ("j" "Journal" entry (file+datetree (concat (file-name-as-directory org-directory) "diary.org"))
+                                 ("j" "Journal" entry (file+datetree (concat org-directory "diary.org"))
                                   "* %?\n%U\n" :clock-in t :clock-resume t)
-                                 ("l" "org-protocol" entry (file org-default-notes-file)
-                                  "* TODO Review %c\n%U\n" :immediate-finish t)
-                                 ("L" "Firefox capture" entry (file+headline org-default-notes-file "Captured from web for review") "* TODO Review %c\n%U\n" :immediate-finish t)
-
+                                 ("L" "org-capture" entry (file+headline
+                                                           org-default-notes-file
+                                                           "Captured from web for review")
+                                  "* TODO %c\n%U\n" :immediate-finish t)
+                                 ("p" "org-capture-with-text" entry (file+headline
+                                                        org-default-notes-file
+                                                        "Captured from web for review")
+                                  "* TODO %^{Title}\nSource: %c\n%U\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n")
                                  ("m" "Meeting" entry (file org-default-notes-file)
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                                 ("p" "Phone call" entry (file org-default-notes-file)
-                                  "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
                                  ("h" "Habit" entry (file org-default-notes-file)
                                   "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))
 
