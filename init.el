@@ -45,7 +45,6 @@
       column-number-mode t
       diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain
-      epa-armor t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t
       line-number-mode t
@@ -136,6 +135,7 @@ re-downloaded in order to locate PACKAGE."
   (load custom-file :noerror :nomessage)
 
   
+
   ;; Fire up package.el
   (setq package-enable-at-startup nil)
   (package-initialize)
@@ -292,6 +292,10 @@ re-downloaded in order to locate PACKAGE."
   (when *is-a-mac*
     (use-package init-fonts))
   (use-package init-git)
+  (use-package init-gpg
+    :config
+    (setq epa-armor t
+          epg-gpg-program "gpg"))
   (use-package init-ibuffer)
   (use-package init-isearch)
   (use-package init-js)
