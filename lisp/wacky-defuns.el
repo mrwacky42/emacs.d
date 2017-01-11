@@ -84,14 +84,21 @@
         (bury-buffer)
       ad-do-it)))
 
+(defadvice kill-region (before unix-werase activate compile)
+  "When called interactively with no active region, delete a single word
+    backwards instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end))
+     (list (save-excursion (backward-word 1) (point)) (point)))))
+
 (defun insert-iso-date (prefix)
-    "Insert the current ISO date stamp. With prefix-arguments, prints more and more detail."
-    (interactive "P")
-    (let ((format (cond
-                   ((not prefix) "%F")
-                   ((equal prefix '(4)) "%FT%T")
-                   ((equal prefix '(16)) "%FT%T%z")
-                   ((equal prefix '(64)) "%FT%T%N%z"))))
-      (insert (format-time-string format))))
+  "Insert the current ISO date stamp. With prefix-arguments, prints more and more detail."
+  (interactive "P")
+  (let ((format (cond
+                 ((not prefix) "%F")
+                 ((equal prefix '(4)) "%FT%T")
+                 ((equal prefix '(16)) "%FT%T%z")
+                 ((equal prefix '(64)) "%FT%T%N%z"))))
+    (insert (format-time-string format))))
 
 (provide 'wacky-defuns)
