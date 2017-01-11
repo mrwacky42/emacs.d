@@ -330,6 +330,7 @@ re-downloaded in order to locate PACKAGE."
     :config (progn
               (setq terraform-indent-level 4
                     hcl-indent-level 4)
+              (modify-syntax-entry ?_ "-" hcl-mode-syntax-table)  ;; Treat underscore as whitespace for easier nav
               (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
               (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))))
 
