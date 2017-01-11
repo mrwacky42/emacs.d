@@ -18,6 +18,7 @@
 (use-package org
   :defer
   :config
+  (use-package org-bullets)
   (use-package org-habit)
   (use-package org-protocol)
 
@@ -82,6 +83,7 @@
    org-treat-S-cursor-todo-selection-as-state-change nil)
 
   (add-to-list 'org-modules 'org-habit)
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
   (org-babel-do-load-languages
    'org-babel-load-languages
