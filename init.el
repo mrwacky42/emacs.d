@@ -38,6 +38,7 @@
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
+ vc-make-backup-files t
  version-control t)
 
 (setq auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
@@ -243,9 +244,11 @@ re-downloaded in order to locate PACKAGE."
     :ensure)
 
   (use-package saveplace
-    :config (progn
-              (setq save-place-file (concat emacs-etc "places"))
-              (setq save-place t)))
+    :init
+    (setq-default save-place t)
+    (setq save-place-file (concat emacs-etc "places")
+          save-place-forget-unreadable-files t
+          save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"))
 
   (use-package smooth-scrolling
     :ensure
@@ -438,6 +441,7 @@ re-downloaded in order to locate PACKAGE."
   ;; (load-local "defuns")
   ;; (load-local "launcher")
   )
+
 
 (provide 'init)
 
