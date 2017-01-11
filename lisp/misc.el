@@ -22,7 +22,7 @@ The optional NEW-WINDOW argument is not used.  It had better be Chrome or Chromi
 
 (cond (*is-a-mac* (setq browse-url-browser-function 'wacky/browse-url-default-macosx-browser))
       (t (progn (setq browse-url-browser-function 'browse-url-generic)
-                (setq browse-url-generic-program "chromium-browser"))))
+                (setq browse-url-generic-program "/opt/google/chrome/chrome"))))
 (setq browse-url-generic-args (list "--incognito"))
 
 ;; Indent with spaces instead of tabs
