@@ -13,6 +13,7 @@
 ;; For Chrome, we're now using https://github.com/sprig/org-capture-extension which has good instructions as well.
 ;; See also:
 ;; http://orgmode.org/worg/org-contrib/org-protocol.html
+;; http://tech.memoryimprintstudio.com/org-capture-from-external-applications/
 ;;; Code:
 
 (use-package org
