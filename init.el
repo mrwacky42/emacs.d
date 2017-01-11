@@ -144,6 +144,12 @@ re-downloaded in order to locate PACKAGE."
 
   
   ;; Packages
+  (use-package beacon
+    :config
+    (setq beacon-color "DarkOrange2"
+          beacon-blink-duration 1)
+    (beacon-mode t))
+
   (use-package uniquify
     :config
     (setq
