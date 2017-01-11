@@ -90,8 +90,7 @@ http://emacsredux.com/blog/2013/04/21/edit-files-as-root/"
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
-  (mouse-wheel-mode t)
-  )
+  (mouse-wheel-mode t))
 
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
