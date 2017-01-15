@@ -82,7 +82,19 @@
                                         ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))
 
    org-treat-S-cursor-todo-selection-as-state-change nil)
-
+  ;; Silliness from https://github.com/howardabrams/dot-files/blob/master/emacs-org.org
+  (font-lock-add-keywords
+   'org-mode `(("^\\*+ \\(TODO\\) "
+                (1 (progn (compose-region (match-beginning 1) (match-end 1) "⚑")
+                          nil)))
+               ("^\\*+ \\(DOING\\) "
+                (1 (progn (compose-region (match-beginning 1) (match-end 1) "⚐")
+                          nil)))
+               ("^\\*+ \\(CANCELED\\) "
+                (1 (progn (compose-region (match-beginning 1) (match-end 1) "✘")
+                          nil)))
+               ("^\\*+ \\(DONE\\) "
+                (1 (progn (compose-region (match-beginning 1) (match-end 1) "✔"))))))
   (add-to-list 'org-modules 'org-habit)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
