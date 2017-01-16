@@ -5,12 +5,13 @@
 
 (use-package elpy
   :ensure
+  :init (with-eval-after-load 'python (elpy-enable))
   :config
-  (progn
-    ;; Disable highlight columns
-    (delete 'elpy-module-highlight-indentation elpy-modules)
-    (elpy-enable)
-    (when (executable-find "ipython") (elpy-use-ipython))))
+  ;; Disable highlight columns and flymake (since we have flycheck)
+  (delete 'elpy-module-highlight-indentation elpy-modules)
+  (delete 'elpy-module-flymake elpy-modules)
+
+  (when (executable-find "ipython") (elpy-use-ipython)))
 
 (use-package jinja2-mode
   :ensure)
