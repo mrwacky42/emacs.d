@@ -29,10 +29,13 @@
    org-agenda-start-on-weekday nil
    org-completion-use-ido t
    org-default-notes-file (concat org-directory "notes.org")
+   org-hide-emphasis-markers t
    org-log-done (quote time)
    org-log-into-drawer t
    org-special-ctrl-a/e t
    org-special-ctrl-k t
+   org-src-fontify-natively t
+   ;; org-src-tab-acts-natively t ;; Not quite right https://github.com/joaotavora/yasnippet/pull/760
    org-yank-adjusted-subtrees t
 
    org-capture-templates (quote (("t" "todo" entry (file org-default-notes-file)
@@ -48,8 +51,8 @@
                                                            "Captured from web for review")
                                   "* TODO %c\n%U\n" :immediate-finish t)
                                  ("p" "org-capture-with-text" entry (file+headline
-                                                        org-default-notes-file
-                                                        "Captured from web for review")
+                                                                     org-default-notes-file
+                                                                     "Captured from web for review")
                                   "* TODO %^{Title}\nSource: %c\n%U\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n")
                                  ("m" "Meeting" entry (file org-default-notes-file)
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
@@ -97,6 +100,10 @@
                 (1 (progn (compose-region (match-beginning 1) (match-end 1) "✔"))))))
   (add-to-list 'org-modules 'org-habit)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+  ;; After #760 lands in yasnippet, we can try this
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda () (setq-local yas-buffer-local-condition '(not (org-in-src-block-p t)))))
 
   (org-babel-do-load-languages
    'org-babel-load-languages
