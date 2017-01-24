@@ -40,7 +40,13 @@
 (use-package gitignore-mode
   :ensure)
 (use-package gitconfig-mode
-  :ensure)
+  :ensure
+  :defer t
+  :config (add-hook 'gitconfig-mode-hook
+                    (lambda () "Tabs are for heathens"
+                      (setq indent-tabs-mode nil
+                            tab-width 4))))
+
 (use-package git-messenger ;; Though see also vc-annotate's "n" & "p" bindings
   :ensure)
 (use-package git-timemachine
