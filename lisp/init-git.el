@@ -12,6 +12,7 @@
         :ensure
         :bind ("C-c g" . magit-status)
         :commands magit-status
+        :diminish auto-revert-mode
         :config
         (fullframe magit-status magit-mode-quit-window)
         (setq magit-completing-read-function 'magit-ido-completing-read
@@ -30,50 +31,23 @@
       (use-package gist
         :ensure)))
 
-(use-package git-blame
-  :ensure)
-;; (use-package git-commit-mode
-;;   :ensure)
-;; (use-package git-rebase-mode
-;;   :ensure)
-
 (use-package gitignore-mode
   :ensure)
+
 (use-package gitconfig-mode
   :ensure
-  :defer t
   :config (add-hook 'gitconfig-mode-hook
                     (lambda () "Tabs are for heathens"
                       (setq indent-tabs-mode nil
                             tab-width 4))))
 
-(use-package git-messenger ;; Though see also vc-annotate's "n" & "p" bindings
-  :ensure)
+;; Though see also vc-annotate's "n" & "p" bindings
+(use-package git-messenger
+  :ensure
+  :bind ("C-x v p" . git-messenger:popup-message))
+
 (use-package git-timemachine
-  :commands git-timemachine
   :ensure)
-
-;; (after-load 'magit
-;;   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-goto-parent-section))
-
-;; (after-load 'magit
-;;   (fullframe magit-status magit-mode-quit-window))
-
-
-;;; When we start working on git-backed files, use git-wip if available
-
-;; (after-load 'magit
-;;   (global-magit-wip-save-mode)
-;;   (diminish 'magit-wip-save-mode))
-
-;; (after-load 'magit
-;;   (diminish 'magit-auto-revert-mode))
-
-
-;; (when *is-a-mac*
-;;   (after-load 'magit
-;;     (add-hook 'magit-mode-hook (lambda () (local-unset-key [(meta h)])))))
-
 
 
 ;; Convenient binding for vc-git-grep
@@ -81,6 +55,12 @@
 
 
 
+;;; Attic
+
+;; (when *is-a-mac*
+;;   (after-load 'magit
+;;     (add-hook 'magit-mode-hook (lambda () (local-unset-key [(meta h)])))))
+
 ;; (autoload 'magit-svn-enabled "magit-svn")
 ;; (defun sanityinc/maybe-enable-magit-svn-mode ()
 ;;   (when (magit-svn-enabled)
@@ -107,12 +87,6 @@
 ;;          (compilation-buffer-name-function (lambda (major-mode-name) "*git-svn*")))
 ;;     (compile (concat "git svn "
 ;;                      (ido-completing-read "git-svn command: " git-svn--available-commands nil t)))))
-
-
-;; (use-package git-messenger
-;;   :ensure
-;;   :bind "C-x v p" . #'git-messenger:popup-message)
-;; ;(global-set-key (kbd "C-x v p") )
 
 (provide 'init-git)
 ;;; init-git.el ends here
