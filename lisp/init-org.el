@@ -38,8 +38,8 @@
    ;; org-src-tab-acts-natively t ;; Not quite right https://github.com/joaotavora/yasnippet/pull/760
    org-yank-adjusted-subtrees t
 
-   org-capture-templates (quote (("t" "todo" entry (file org-default-notes-file)
-                                  "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+   org-capture-templates (quote (("t" "todo" entry (file+headline org-default-notes-file "Captured")
+                                  "* TODO %?\n%U\n%A\n" :clock-in t :clock-resume t :empty-line t)
                                  ("r" "respond" entry (file org-default-notes-file)
                                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
                                  ("n" "note" entry (file org-default-notes-file)
