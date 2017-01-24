@@ -244,5 +244,13 @@ comment as a filename."
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
+;; For emacs in terminal
+;; In iterm2, we map C-return to send the escape code "[z5b"
+;; and here, we map it back to C-return
+;; This lets us press C-return in 'emacsclient -nw notes.org'
+;; Extracted from
+;; http://community.dur.ac.uk/p.j.heslin/Software/Emacs/Download/xterm-extras.el
+(define-key function-key-map "\e[z5b"    [C-return])
+
 (provide 'wacky-starter-kit)
 ;;; wacky-starter-kit.el ends here
