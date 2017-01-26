@@ -156,9 +156,8 @@ re-downloaded in order to locate PACKAGE."
     (setq
      uniquify-buffer-name-style 'reverse
      uniquify-separator ":"
-     uniquify-after-kill-buffer-p t      ; rename after killing dupes
-     uniquify-ignore-buffers-re "^\\*"; don't muck with special buffers
-     ))
+     uniquify-after-kill-buffer-p t      ;; rename after killing dupes
+     uniquify-ignore-buffers-re "^\\*")) ;; don't muck with special buffers
 
   (use-package multiple-cursors
     :ensure
@@ -264,9 +263,9 @@ re-downloaded in order to locate PACKAGE."
     (use-package flycheck-rust
       :ensure)
     (setq
-             flycheck-check-syntax-automatically '(save idle-change mode-enabled)
-             flycheck-idle-change-delay 0.8
-             flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+     flycheck-check-syntax-automatically '(save idle-change mode-enabled)
+     flycheck-idle-change-delay 0.8
+     flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
     (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
   
@@ -370,7 +369,7 @@ re-downloaded in order to locate PACKAGE."
      ido-max-prospects 10
      ido-use-filename-at-point nil
      ido-use-virtual-buffers t)
-
+    (add-to-list 'ido-ignore-files "\\.DS_Store")
     (use-package ido-ubiquitous
       :ensure
       :config (ido-ubiquitous-mode t)))
@@ -381,6 +380,7 @@ re-downloaded in order to locate PACKAGE."
     :config (smex-initialize)
     :init (setq smex-save-file (concat emacs-etc ".smex-items"))
     :bind (("M-x" . smex)
+           ("M-X" . smex-major-mode-commands)
            ("C-c x" . smex)))
 
   
