@@ -54,12 +54,6 @@
         (goto-line (read-number "Goto line: ")))
     (linum-mode -1)))
 
-(defun wacky-darken ()
-  "Load dark theme, since I have odd reasons for not doing this at startup"
-  (interactive)
-  (require 'color-theme-solarized)
-  (color-theme-solarized-dark) )
-
 (defun wacky-add-watchwords ()
   (font-lock-add-keywords
    nil '(("\\<\\(FIX\\(_?ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|NOCOMMIT\\|XXX\\)"
