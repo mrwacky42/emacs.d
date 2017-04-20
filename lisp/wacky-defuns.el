@@ -95,4 +95,16 @@
                  ((equal prefix '(64)) "%FT%T%N%z"))))
     (insert (format-time-string format))))
 
+(setq-default show-trailing-whitespace nil)
+
+(defun show-trailing-whitespace ()
+  (interactive)
+  (setq show-trailing-whitespace t))
+
+(add-hook 'text-mode-hook 'show-trailing-whitespace)
+(add-hook 'prog-mode-hook 'show-trailing-whitespace)
+
+(defun disable-show-trailing-whitespace ()
+  (setq show-trailing-whitespace nil))
+
 (provide 'wacky-defuns)
