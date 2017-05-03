@@ -146,6 +146,8 @@ re-downloaded in order to locate PACKAGE."
   
   ;; Packages
   (use-package beacon
+    :demand t
+    :bind ("C-c C-b" . beacon-blink)
     :config
     (setq beacon-color "DarkOrange2"
           beacon-blink-duration 1)
