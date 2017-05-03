@@ -421,6 +421,9 @@ re-downloaded in order to locate PACKAGE."
     :config (setq smooth-scroll-margin 5
                   scroll-conservatively 9999
                   scroll-preserve-screen-position t))
+  (use-package zop-to-char
+    :ensure
+    :config (global-set-key [remap zap-to-char] 'zop-to-char))
 
   (when (version< "24.4" emacs-version)
     (use-package paradox
