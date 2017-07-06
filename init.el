@@ -262,13 +262,10 @@ re-downloaded in order to locate PACKAGE."
     :ensure
     :init (add-hook 'after-init-hook 'global-flycheck-mode)
     :config
-    (use-package flycheck-rust
-      :ensure)
     (setq
      flycheck-check-syntax-automatically '(save idle-change mode-enabled)
      flycheck-idle-change-delay 0.8
-     flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+     flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list))
 
   
   (recentf-mode 1)
@@ -308,6 +305,7 @@ re-downloaded in order to locate PACKAGE."
   (use-package init-perl)
   (use-package init-puppet)
   (use-package init-python)
+  (use-package init-rust)
   (use-package init-sessions)
   (use-package init-spelling)
   (use-package init-windows)
