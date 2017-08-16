@@ -367,10 +367,11 @@ re-downloaded in order to locate PACKAGE."
      ido-enable-prefix nil
      ido-handle-duplicate-virtual-buffers 2
      ido-max-prospects 10
+     ido-save-directory-list-file (concat emacs-etc "ido.last")
      ido-use-filename-at-point nil
      ido-use-virtual-buffers t)
     (add-to-list 'ido-ignore-files "\\.DS_Store")
-    (use-package ido-ubiquitous
+    (use-package ido-completing-read+
       :ensure
       :config (ido-ubiquitous-mode t)))
 
