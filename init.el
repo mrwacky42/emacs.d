@@ -335,9 +335,11 @@ re-downloaded in order to locate PACKAGE."
     :config (progn
               (setq terraform-indent-level 4
                     hcl-indent-level 4)
-              (modify-syntax-entry ?_ "-" hcl-mode-syntax-table)  ;; Treat underscore as whitespace for easier nav
+              (modify-syntax-entry ?_ "-" hcl-mode-syntax-table) ;; Treat underscore as whitespace for easier nav
               (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
-              (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))))
+              (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))
+              ;; Terraform fmt insists on 2 spaces. So we reindent to 4 directly afterwards.
+              (advice-add #'terraform-format-buffer :after #'indent-buffer)))
 
   ;; attic
 

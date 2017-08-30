@@ -1,3 +1,8 @@
+(defun indent-buffer ()
+  "Reindent the buffer."
+  (interactive)
+  (save-excursion (indent-region (point-min) (point-max))))
+
 ;; TODO consider delete-trailing-whitespace only for danger modes, or
 ;; blacklist for each operation or something
 (defun iwb ()
@@ -7,7 +12,7 @@
     (if (not (memq major-mode danger-modes))
         (progn
           (untabify (point-min) (point-max))
-          (indent-region (point-min) (point-max))
+          (indent-buffer)
           (delete-trailing-whitespace))
       (progn
         (delete-trailing-whitespace)
