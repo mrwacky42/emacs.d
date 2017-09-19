@@ -112,4 +112,8 @@
 (defun disable-show-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
 
+(defun wacky-tab-hook ()
+  "A defun to use as a mode-hook to set tab-width."
+  (setq tab-width 4))
+
 (provide 'wacky-defuns)

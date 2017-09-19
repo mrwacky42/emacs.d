@@ -292,6 +292,7 @@ re-downloaded in order to locate PACKAGE."
   (when *is-a-mac*
     (use-package init-fonts))
   (use-package init-git)
+  (use-package init-go)
   (use-package init-gpg
     :config
     (setq epa-armor t
