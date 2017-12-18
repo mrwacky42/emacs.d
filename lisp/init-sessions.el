@@ -4,7 +4,7 @@
   :config (progn
             (setq desktop-path (list emacs-etc)
                   desktop-auto-save-timeout 600)
-            (dolist (mode '(magit-mode git-commit-mode))
+            (dolist (mode '(magit-mode git-commit-mode ssh-config-mode))
               (add-to-list 'desktop-modes-not-to-save mode))))
 
 (defadvice desktop-read (around trace-desktop-errors activate)
