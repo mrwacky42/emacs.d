@@ -46,6 +46,9 @@
   :ensure
   :bind ("C-x v p" . git-messenger:popup-message))
 
+(use-package git-link
+  :ensure)
+
 (use-package git-timemachine
   :ensure)
 
