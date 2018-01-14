@@ -388,6 +388,26 @@ re-downloaded in order to locate PACKAGE."
            ("C-c x" . smex)))
 
   
+  (use-package dired+
+    :ensure
+    :init (setq diredp-hide-details-initially-flag nil)
+    :config
+    ;; enable `a' command which replaces the current dired buffer rather
+    ;; than opening an additional buffer when you move to another
+    ;; directory
+    (put 'dired-find-alternate-file 'disabled nil)  ;enable `a' command
+    ;; Replace buffers instead of making new ones when navigating in dired
+    ;; From: http://ergoemacs.org/emacs/emacs_dired_tips.html
+    (add-hook 'dired-mode-hook
+              (lambda ()
+                (define-key dired-mode-map (kbd "<return>")
+                  'dired-find-alternate-file) ; was dired-advertised-find-file
+                (define-key dired-mode-map (kbd "^")
+                  (lambda () (interactive) (find-alternate-file "..")))))
+    )
+                                        ; was dired-up-directory
+
+  
   ;; (use-package diff-hl
   ;;   :ensure
   ;;   :init (global-diff-hl-mode)
@@ -440,6 +460,15 @@ re-downloaded in order to locate PACKAGE."
 
   (when *is-a-mac*
     (use-package init-osx))
+
+  (use-package calendar
+    :defer 1
+    :config (progn
+              (setq calendar-week-start-day 1)
+              (calendar-set-date-style 'iso)
+              (setq calendar-latitude 33.99
+                    calendar-longitude -118.42)))
+                                        ;33.9921976,-118.4235076
 
   ;; (defun load-local (file)
   ;;   (load (f-expand file user-emacs-directory)))

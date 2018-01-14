@@ -22,6 +22,8 @@
   (use-package org-bullets)
   (use-package org-habit)
   (use-package org-protocol)
+  (use-package ox-gfm
+    :ensure)
 
   (setq org-directory "~/info/orgfiles/")
   (setq
@@ -109,7 +111,7 @@
    'org-babel-load-languages
    '((emacs-lisp . t)
      (python . t)
-     (sh . t)))
+     (shell . t)))
 
   (defadvice org-capture
       (after make-full-window-frame activate)
