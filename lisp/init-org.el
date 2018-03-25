@@ -14,6 +14,11 @@
 ;; See also:
 ;; http://orgmode.org/worg/org-contrib/org-protocol.html
 ;; http://tech.memoryimprintstudio.com/org-capture-from-external-applications/
+
+;; Just found:
+;; https://blog.aaronbieber.com/2016/11/24/org-capture-from-anywhere-on-your-mac.html
+;; https://mac4translators.blogspot.jp/2017/11/capture-really-everywhere.html
+
 ;;; Code:
 
 (use-package org
