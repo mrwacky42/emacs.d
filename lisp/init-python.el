@@ -12,8 +12,8 @@
   (delete 'elpy-module-flymake elpy-modules)
 
   (when (executable-find "ipython")
-    (elpy-use-ipython)
-    (setq python-shell-interpreter "ipython" python-shell-interpreter-args "--simple-prompt --pprint")))
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "-i --simple-prompt")))
 
 (use-package jinja2-mode
   :ensure)
