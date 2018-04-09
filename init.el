@@ -338,7 +338,7 @@ re-downloaded in order to locate PACKAGE."
       "Treat underscore as whitespace for easier nav"
       (modify-syntax-entry ?_ "-" hcl-mode-syntax-table))
     (add-hook 'terraform-mode-hook 'terraform-syntax-override)
-    (set-variable 'terraform-format-on-save-mode t)
+    (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
     (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode)))
 
