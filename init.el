@@ -41,7 +41,8 @@
  vc-make-backup-files t
  version-control t)
 
-(setq auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
+(setq abbrev-file-name (concat emacs-etc "abbrev_defs")
+      auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
       color-theme-is-global t
       column-number-mode t
       diff-switches "-u"

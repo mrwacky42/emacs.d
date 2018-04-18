@@ -24,18 +24,32 @@
 (define-key ctl-x-map "\C-i"
   #'endless/ispell-word-then-abbrev)
 
+(defun endless/simple-get-word ()
+  (car-safe (save-excursion (ispell-get-word nil))))
+
 (defun endless/ispell-word-then-abbrev (p)
   "Call `ispell-word', then create an abbrev for it.
 With prefix P, create local abbrev. Otherwise it will
-be global."
+be global.
+If there's nothing wrong with the word at point, keep
+looking for a typo until the beginning of buffer. You can
+skip typos you don't want to fix with `SPC', and you can
+abort completely with `C-g'."
   (interactive "P")
   (let (bef aft)
     (save-excursion
-      (while (and (setq bef (thing-at-point 'word))
-                  (not (ispell-word nil 'quiet))
-                  (not (bobp)))
-        (backward-word))
-      (setq aft (thing-at-point 'word)))
+      (while (if (setq bef (endless/simple-get-word))
+                 ;; Word was corrected or used quit.
+                 (if (ispell-word nil 'quiet)
+                     nil ; End the loop.
+                   ;; Also end if we reach `bob'.
+                   (not (bobp)))
+               ;; If there's no word at point, keep looking
+               ;; until `bob'.
+               (not (bobp)))
+        (backward-word)
+        (backward-char))
+      (setq aft (endless/simple-get-word)))
     (if (and aft bef (not (equal aft bef)))
         (let ((aft (downcase aft))
               (bef (downcase bef)))
@@ -46,8 +60,7 @@ be global."
                    bef aft (if p "loc" "glob")))
       (user-error "No typo at or before point"))))
 
-(setq save-abbrevs 'silently
-      abbrev-file-name (concat emacs-etc "abbrev_defs"))
+(setq save-abbrevs 'silently)
 (setq-default abbrev-mode t)
 
 (provide 'init-spelling)
