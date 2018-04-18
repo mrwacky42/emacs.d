@@ -103,19 +103,16 @@ re-run this check once $PATH has been configured"
   ;;(package-refresh-contents)
 
   
-;;; On-demand installation of packages
 
-  (defun require-package (package &optional min-version no-refresh)
-    "Install given PACKAGE, optionally requiring MIN-VERSION.
-If NO-REFRESH is non-nil, the available package lists will not be
-re-downloaded in order to locate PACKAGE."
-    (if (package-installed-p package min-version)
-        t
-      (if (or (assoc package package-archive-contents) no-refresh)
-          (package-install package)
-        (progn
-          (package-refresh-contents)
-          (require-package package min-version t)))))
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (eval-when-compile
+    (require 'use-package))
 
   
   ;;----------------------------------------------------------------------------
@@ -135,14 +132,6 @@ re-downloaded in order to locate PACKAGE."
   (setq custom-file
         (concat (expand-file-name user-emacs-directory) "custom.el"))
   (load custom-file :noerror :nomessage)
-
-  
-
-  ;; Fire up package.el
-  (setq package-enable-at-startup nil)
-  (package-initialize)
-  (require-package 'use-package)
-  (require 'use-package)
 
   
   ;; Packages
@@ -276,6 +265,7 @@ re-downloaded in order to locate PACKAGE."
     (global-prettify-symbols-mode 1))
 
   
+
   ;; My abbreviated/modified/smothered/covered/chunked version of the starter-kit package.
   (use-package wacky-starter-kit)
   ;; (use-package wacky-starter-kit-js)
