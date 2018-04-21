@@ -14,4 +14,4 @@ var
 /ac-comphist.dat
 /eshell/history
 /bookmarks
-
+*.elc
