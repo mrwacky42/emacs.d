@@ -20,7 +20,7 @@
           (lambda ()
             (when (string= (buffer-name) "*scratch*")
               (animate-string ";; Mr Wacky Heavy Industries is online!!\n" 4)
-              (next-line))))
+              (forward-line))))
 
 (random t) ;; Seed the random-number generator
 
