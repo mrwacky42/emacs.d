@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
 # name: aws_elb
-# key: aws_elb
-# binding: direct-keybinding
+# key: awselb
 # --
 resource "aws_elb" "${1:resource name}" {
     name = "\${var.role_name}"

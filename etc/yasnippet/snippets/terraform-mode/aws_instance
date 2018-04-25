@@ -1,7 +1,6 @@
 # -*- mode: snippet; -*-
 # name: aws_instance
-# key: aws_instance
-# binding: direct-keybinding
+# key: awsinstance
 # --
 resource "aws_instance" "${1:resource name}" {
     ami = "\${terraform_remote_state.core.output.ami_stable}"

@@ -22,28 +22,18 @@
               (animate-string ";; Mr Wacky Heavy Industries is online!!\n" 4)
               (next-line))))
 
-;; Strive for less clutter in user-emacs-directory
-(setq emacs-etc (concat user-emacs-directory "etc/"))
-(when
-    (not (file-exists-p emacs-etc))
-  (make-directory emacs-etc))
-
 (random t) ;; Seed the random-number generator
-
 
 ;; backup options
 (setq
  backup-by-copying t ;; Set backups to not hose sym/hard links
- backup-directory-alist `(("." . ,(concat emacs-etc "backups")))
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
  vc-make-backup-files t
  version-control t)
 
-(setq abbrev-file-name (concat emacs-etc "abbrev_defs")
-      auto-save-list-file-prefix (concat emacs-etc "auto-save-list")
-      color-theme-is-global t
+(setq color-theme-is-global t
       column-number-mode t
       diff-switches "-u"
       ediff-window-setup-function 'ediff-setup-windows-plain
@@ -53,7 +43,6 @@
       mouse-yank-at-point t
       require-final-newline t
       save-interprogram-paste-before-kill t
-      save-place-file (concat emacs-etc "places")
       sentence-end-double-space nil
       shift-select-mode nil
       visible-bell t
@@ -78,7 +67,6 @@
   (defconst *is-a-mac* (eq system-type 'darwin))
 
   (require 'package)
-  (setq package-user-dir (expand-file-name "elpa" emacs-etc))
 
   
 ;;; Standard package repositories
@@ -99,6 +87,10 @@
 
   (eval-when-compile
     (require 'use-package))
+  
+
+  ;; Strive for less clutter in user-emacs-directory
+  (use-package no-littering :ensure)
 
   
   ;;----------------------------------------------------------------------------
@@ -221,11 +213,11 @@
     :ensure)
 
   (use-package saveplace
-    :init
+    :config
     (setq-default save-place t)
-    (setq save-place-file (concat emacs-etc "places")
-          save-place-forget-unreadable-files t
-          save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"))
+    (setq save-place-forget-unreadable-files t
+          save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"
+          ))
 
   (use-package smooth-scrolling
     :ensure
@@ -347,7 +339,6 @@
      ido-enable-prefix nil
      ido-handle-duplicate-virtual-buffers 2
      ido-max-prospects 10
-     ido-save-directory-list-file (concat emacs-etc "ido.last")
      ido-use-filename-at-point nil
      ido-use-virtual-buffers t)
     (add-to-list 'ido-ignore-files "\\.DS_Store")
@@ -359,7 +350,6 @@
   (use-package smex
     :ensure
     :config (smex-initialize)
-    :init (setq smex-save-file (concat emacs-etc ".smex-items"))
     :bind (("M-x" . smex)
            ("M-X" . smex-major-mode-commands)
            ("C-c x" . smex)))

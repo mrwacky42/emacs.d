@@ -1,7 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: aws_route53_ptr
 # key: ptr
-# binding: direct-keybinding
 # --
 resource "aws_route53_record" "$1-PTR-by-instance" {
    zone_id = "\${var.networkprefix_inaddr_arpa_zone_id}"

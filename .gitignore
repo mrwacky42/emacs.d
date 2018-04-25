@@ -4,10 +4,9 @@ elpa
 places
 session.*
 url
-var
+/var
 /tramp
 /.mc-lists.el
-/etc/
 /recentf
 /ido.last
 /.#ido.last

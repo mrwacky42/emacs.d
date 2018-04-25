@@ -22,18 +22,21 @@
 ;;; Code:
 
 (use-package org
+  :ensure org-plus-contrib
+  :pin org
   :defer
   :config
-  (use-package org-bullets)
+  (use-package org-bullets :ensure)
   (use-package org-habit)
   (use-package org-protocol)
-  (use-package ox-gfm
-    :ensure)
+  (use-package ox-gfm :ensure)
 
   (setq org-directory "~/info/orgfiles/")
   (setq
    org-agenda-files (list org-directory) ; default "~/.agenda_files"
    org-agenda-start-on-weekday nil
+   org-blank-before-new-entry (quote ((heading . t)
+                                      (plain-list-item . t)))
    org-completion-use-ido t
    org-default-notes-file (concat org-directory "notes.org")
    org-hide-emphasis-markers t

@@ -2,8 +2,7 @@
 (use-package desktop
   :init (desktop-save-mode)
   :config (progn
-            (setq desktop-path (list emacs-etc)
-                  desktop-auto-save-timeout 600)
+            (setq desktop-auto-save-timeout 600)
             (dolist (mode '(magit-mode git-commit-mode ssh-config-mode))
               (add-to-list 'desktop-modes-not-to-save mode))))
 
@@ -34,7 +33,6 @@
 ;; Restore histories and registers after saving
 ;;----------------------------------------------------------------------------
 (setq-default history-length 1000)
-(setq savehist-file (concat emacs-etc "history"))
 (savehist-mode t)
 
 ;; (use-package session
@@ -83,5 +81,5 @@
     (use-package frame-restore :ensure)
     (frame-restore)))
 
-(setq frame-restore-parameters-file (concat emacs-etc "frame-restore-parameters"))
+(setq frame-restore-parameters-file (no-littering-expand-var-file-name "frame-restore-parameters"))
 (provide 'init-sessions)
