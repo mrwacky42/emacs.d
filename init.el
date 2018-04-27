@@ -101,18 +101,17 @@ you always store the package-selected-packages sorted."
  vc-make-backup-files t
  version-control t)
 
-(setq
- column-number-mode t
- diff-switches "-u"
- inhibit-startup-echo-area-message t
- inhibit-startup-message t
- line-number-mode t
- mouse-yank-at-point t
- require-final-newline t
- save-interprogram-paste-before-kill t
- sentence-end-double-space nil
- shift-select-mode nil
- visible-bell t)
+(setq column-number-mode t
+      diff-switches "-u"
+      inhibit-startup-echo-area-message t
+      inhibit-startup-message t
+      line-number-mode t
+      mouse-yank-at-point t
+      require-final-newline t
+      save-interprogram-paste-before-kill t
+      sentence-end-double-space nil
+      shift-select-mode nil
+      visible-bell t)
 
 
 
