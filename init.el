@@ -189,6 +189,10 @@ you always store the package-selected-packages sorted."
   :ensure
   :bind ("M-;" . comment-dwim-2))
 
+(use-package unfill
+  :ensure
+  :bind ("M-q" . unfill-toggle))
+
 (use-package yasnippet
   :ensure
   :pin gnu
