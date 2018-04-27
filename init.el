@@ -83,7 +83,11 @@ you always store the package-selected-packages sorted."
 (use-package bind-key :ensure t)
 
 ;; Strive for less clutter in user-emacs-directory
-(use-package no-littering :ensure)
+(use-package no-littering
+  :ensure
+  :config
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
 
 (setq load-prefer-newer t)
 
