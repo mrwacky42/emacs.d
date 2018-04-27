@@ -50,7 +50,7 @@
 
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 
 (setq package-enable-at-startup nil)
 (package-initialize)
