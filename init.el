@@ -443,6 +443,10 @@ you always store the package-selected-packages sorted."
                   calendar-longitude -118.42)))
                                         ;33.9921976,-118.4235076
 
+;; s-q usually bound to save-buffers-kill-emacs.
+;; What kind of person needs to quit emacs?
+(global-unset-key (kbd "s-q"))
+
 ;; (defun load-local (file)
 ;;   (load (f-expand file user-emacs-directory)))
 
