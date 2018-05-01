@@ -34,8 +34,8 @@
   "Use this as advice around package--save-selected-packages to ensure
 you always store the package-selected-packages sorted."
   (let ((package-list (copy-seq (if thing
-                           thing
-                         package-selected-packages))))
+                                    thing
+                                  package-selected-packages))))
     (funcall old-function (cl-sort package-list #'string< :key #'symbol-name))))
 
 (advice-add 'package--save-selected-packages :around #'wacky/package-selected-packages-sorter)
@@ -48,6 +48,7 @@ you always store the package-selected-packages sorted."
 (setq package-enable-at-startup nil
       file-name-handler-alist nil
       gc-cons-threshold most-positive-fixnum)
+
 (add-hook 'after-init-hook
           `(lambda ()
              (setq file-name-handler-alist file-name-handler-alist-old
@@ -96,19 +97,18 @@ you always store the package-selected-packages sorted."
  vc-make-backup-files t
  version-control t)
 
-(setq color-theme-is-global t
-      column-number-mode t
-      diff-switches "-u"
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      inhibit-startup-echo-area-message t
-      inhibit-startup-message t
-      line-number-mode t
-      mouse-yank-at-point t
-      require-final-newline t
-      save-interprogram-paste-before-kill t
-      sentence-end-double-space nil
-      shift-select-mode nil
-      visible-bell t)
+(setq
+ column-number-mode t
+ diff-switches "-u"
+ inhibit-startup-echo-area-message t
+ inhibit-startup-message t
+ line-number-mode t
+ mouse-yank-at-point t
+ require-final-newline t
+ save-interprogram-paste-before-kill t
+ sentence-end-double-space nil
+ shift-select-mode nil
+ visible-bell t)
 
 
 
@@ -186,14 +186,6 @@ you always store the package-selected-packages sorted."
 (use-package comment-dwim-2
   :ensure
   :bind ("M-;" . comment-dwim-2))
-
-;; (use-package diff-hl
-;;   :ensure
-;;   :init (global-diff-hl-mode)
-;;   :config (progn
-;;             (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-;;             (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode)
-;;             (add-hook 'vc-checkin-hook 'diff-hl-update)))
 
 (use-package yasnippet
   :ensure
@@ -341,21 +333,6 @@ you always store the package-selected-packages sorted."
   (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode)))
 
-;; attic
-
-;; something like:
-;; (defun magit-such and such nil)
-;; (magit-init-fns magit-such)
-;; (use-package magit
-;;   :config
-;;   (magit-init-fns))
-
-;; starter-kit bug.  This isn't needed with newer inf-ruby.
-;; https://github.com/technomancy/emacs-starter-kit/pull/145
-;;(remove-hook 'ruby-mode-hook 'inf-ruby-keys)
-
-(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-
 
 (use-package ido
   :init (progn
@@ -367,7 +344,6 @@ you always store the package-selected-packages sorted."
    ido-create-new-buffer 'always
    ido-enable-flex-matching t
    ido-enable-prefix nil
-   ido-handle-duplicate-virtual-buffers 2
    ido-max-prospects 10
    ido-use-filename-at-point nil
    ido-use-virtual-buffers t)
@@ -404,12 +380,6 @@ you always store the package-selected-packages sorted."
                 (lambda () (interactive) (find-alternate-file "..")))))
   )
                                         ; was dired-up-directory
-
-
-;; (use-package diff-hl
-;;   :ensure
-;;   :init (global-diff-hl-mode)
-;;   :config (add-hook 'vc-checkin-hook 'diff-hl-update))
 
 
 (use-package markdown-mode
