@@ -22,6 +22,14 @@
               (animate-string ";; Mr Wacky Heavy Industries is online!!\n" 4)
               (forward-line))))
 
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
 (defun wacky/package-selected-packages-sorter (old-function &optional thing)
   "Use this as advice around package--save-selected-packages to ensure
 you always store the package-selected-packages sorted."
