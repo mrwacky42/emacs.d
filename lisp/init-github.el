@@ -1,19 +1,10 @@
 (require 'init-git)
 
-(use-package yagist
-  :ensure)
-
-(use-package github-browse-file
-  :ensure)
-
 (use-package bug-reference-github
   :ensure
   :config
   (add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
   (add-hook 'prog-mode-hook 'bug-reference-prog-mode))
-
-(use-package github-clone
-  :ensure)
 
 (use-package gist
   :ensure
@@ -22,11 +13,20 @@
   ;; This moves the point right back to the gist list buffer.
   (advice-add 'gist-fetch-current :after #'wacky/other-window))
 
+(use-package github-browse-file
+  :ensure)
+
+(use-package github-clone
+  :ensure)
+
 (use-package magithub
   :ensure
   :after magit
   :config
   (magithub-feature-autoinject t)
   (setq magithub-clone-default-directory "~/src"))
+
+(use-package yagist
+  :ensure)
 
 (provide 'init-github)
