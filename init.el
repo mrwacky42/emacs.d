@@ -141,7 +141,6 @@ you always store the package-selected-packages sorted."
 (use-package init-benchmarking)
 (use-package beacon
   :ensure t
-  :demand t
   :bind ("C-c C-b" . beacon-blink)
   :config
   (setq beacon-color "DarkOrange2"
