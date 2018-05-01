@@ -3,33 +3,32 @@
 ;;; Heavily inspired by https://github.com/purcell/emacs.d/blob/master/lisp/init-git.el
 ;;; Code:
 
-(if (version< "24.4" emacs-version)
-    (progn
-      ;; Micro-optimization, I rarely use non-git anymore
-      (setq vc-handled-backends nil)
+(progn
+  ;; Micro-optimization, I rarely use non-git anymore
+  (setq vc-handled-backends nil)
 
-      (use-package magit
-        :ensure
-        :bind ("C-c g" . magit-status)
-        :commands magit-status
-        :diminish auto-revert-mode
-        :config
-        (fullframe magit-status magit-mode-quit-window)
-        (setq magit-completing-read-function 'magit-ido-completing-read
-              magit-diff-refine-hunk t
-              magit-process-popup-time 10
-              magit-save-repository-buffers nil)
+  (use-package magit
+    :ensure
+    :bind ("C-c g" . magit-status)
+    :commands magit-status
+    :diminish auto-revert-mode
+    :config
+    (fullframe magit-status magit-mode-quit-window)
+    (setq magit-completing-read-function 'magit-ido-completing-read
+          magit-diff-refine-hunk t
+          magit-process-popup-time 10
+          magit-save-repository-buffers nil)
 
-        ;; Re-center when moving forward in magit-diffs. This way
-        ;; we always can see as much of the diff as possible.
-        (defadvice magit-section-forward (after magit-section-forward-before-advice activate)
-          (recenter-top-bottom 0))
+    ;; Re-center when moving forward in magit-diffs. This way
+    ;; we always can see as much of the diff as possible.
+    (defadvice magit-section-forward (after magit-section-forward-before-advice activate)
+      (recenter-top-bottom 0))
 
-        (use-package magit-svn
-          :ensure))
+    (use-package magit-svn
+      :ensure))
 
-      (use-package gist
-        :ensure)))
+  (use-package gist
+    :ensure))
 
 (use-package gitignore-mode
   :ensure)
