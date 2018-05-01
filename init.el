@@ -22,6 +22,17 @@
               (animate-string ";; Mr Wacky Heavy Industries is online!!\n" 4)
               (forward-line))))
 
+(defun wacky/package-selected-packages-sorter (old-function &optional thing)
+  "Use this as advice around package--save-selected-packages to ensure
+you always store the package-selected-packages sorted."
+  (let ((package-list (copy-seq (if thing
+                           thing
+                         package-selected-packages))))
+    (funcall old-function (cl-sort package-list #'string< :key #'symbol-name))))
+
+(advice-add 'package--save-selected-packages :around #'wacky/package-selected-packages-sorter)
+
+
 (random t) ;; Seed the random-number generator
 
 
