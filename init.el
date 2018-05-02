@@ -240,7 +240,7 @@ you always store the package-selected-packages sorted."
 
 (use-package saveplace
   :config
-  (setq-default save-place t)
+  (save-place-mode)
   (setq save-place-forget-unreadable-files t
                                         ;      save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"
         ))
