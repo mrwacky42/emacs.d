@@ -251,9 +251,8 @@ you always store the package-selected-packages sorted."
 (use-package saveplace
   :config
   (save-place-mode)
-  (setq save-place-forget-unreadable-files t
-                                        ;      save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"
-        ))
+  (setq save-place-forget-unreadable-files t))
+;; save-place-skip-check-regexp "\\`/\\(?:cdrom\\|floppy\\|mnt\\|/[0-9]\\|\\(?:[^@/:]*@\\)?[^@/:]*[^@/:.]:\\)"
 
 (use-package flycheck
   :ensure
@@ -271,6 +270,7 @@ you always store the package-selected-packages sorted."
   (recentf-mode 1)
   (setq recentf-max-saved-items 100
         recentf-exclude '("/tmp/" "/ssh:"))
+;  (add-to-list 'recentf-exclude "^/\\(?:ssh\\|su\\|sudo\\)?:")
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
