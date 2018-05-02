@@ -37,13 +37,12 @@ The optional NEW-WINDOW argument is not used.  It had better be Chrome or Chromi
 
 ;; Avoid GC when in minibuffer
 ;; https://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
-(setq default-gc-cons-threshold gc-cons-threshold)
 
-(defun my-minibuffer-setup-hook ()
-  (setq gc-cons-threshold most-positive-fixnum))
+;; (defun my-minibuffer-setup-hook ()
+;;   (setq gc-cons-threshold most-positive-fixnum))
 
-(defun my-minibuffer-exit-hook ()
-  (setq gc-cons-threshold default-gc-cons-threshold))
+;; (defun my-minibuffer-exit-hook ()
+;;   (setq gc-cons-threshold my-gc-cons-threshold))
 
 ;; Disabled 2016-05-09
 ;; (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)

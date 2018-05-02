@@ -45,6 +45,7 @@ you always store the package-selected-packages sorted."
 
 
 (defvar file-name-handler-alist-old file-name-handler-alist)
+(defvar my-gc-cons-threshold (* 20 1024 1024))
 (setq package-enable-at-startup nil
       file-name-handler-alist nil
       gc-cons-threshold most-positive-fixnum)
@@ -52,7 +53,7 @@ you always store the package-selected-packages sorted."
 (add-hook 'after-init-hook
           `(lambda ()
              (setq file-name-handler-alist file-name-handler-alist-old
-                   gc-cons-threshold (* 20 1024 1024))
+                   gc-cons-threshold my-gc-cons-threshold)
              (garbage-collect)) t)
 
 ;; Bootstrappin'
