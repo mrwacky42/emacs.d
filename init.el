@@ -36,7 +36,7 @@ you always store the package-selected-packages sorted."
   (let ((package-list (copy-seq (if thing
                                     thing
                                   package-selected-packages))))
-    (funcall old-function (cl-sort package-list #'string< :key #'symbol-name))))
+    (funcall old-function (cl-sort package-list #'string-lessp))))
 
 (advice-add 'package--save-selected-packages :around #'wacky/package-selected-packages-sorter)
 
