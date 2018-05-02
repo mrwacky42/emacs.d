@@ -4,9 +4,15 @@
 
 ;;; Code:
 
-;; Do not pause on redisplay, obsolete since 24.5.
-(if (version< emacs-version "24.5")
-    (setq redisplay-dont-pause t))
+(setq visible-bell nil)
+(setq ring-bell-function
+      (lambda
+        ()
+        "Inspired by https://www.emacswiki.org/emacs/AlarmBell"
+        (unless (memq this-command
+	              '(isearch-abort abort-recursive-edit exit-minibuffer keyboard-quit))
+          (invert-face 'mode-line)
+          (run-with-timer 0.2 nil 'invert-face 'mode-line))))
 
 ;; Show keystrokes in minibuffer early
 (setq echo-keystrokes 0.1)
