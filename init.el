@@ -400,7 +400,7 @@ you always store the package-selected-packages sorted."
 
 (use-package markdown-mode
   :ensure
-  :config (setq markdown-command "pandoc --smart -f markdown -t html"))
+  :config (setq markdown-command "pandoc -f markdown+smart -t html"))
 
 (use-package gh-md
   :ensure
