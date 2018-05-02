@@ -160,6 +160,15 @@ you always store the package-selected-packages sorted."
   :config
   (copy-as-format))
 
+(use-package epa
+  :defer t
+  :config
+  ;; Let Emacs query the passphrase through the minibuffer
+  ;; Add 'allow-loopback-pinentry' to ~/.gnupg/gpg-agent.conf
+  (setq epa-pinentry-mode 'loopback)
+  ;; Always replace encrypted text with plain text version
+  (setq epa-replace-original-text t))
+
 (use-package uniquify
   :config
   (setq
