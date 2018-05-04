@@ -111,8 +111,7 @@ you always store the package-selected-packages sorted."
       require-final-newline t
       save-interprogram-paste-before-kill t
       sentence-end-double-space nil
-      shift-select-mode nil
-      visible-bell t)
+      shift-select-mode nil)
 
 
 
