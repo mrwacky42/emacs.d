@@ -335,17 +335,11 @@ you always store the package-selected-packages sorted."
 (use-package web-mode
   :ensure)
 
-
-;; Somehow I cannot get the editorconfig package NOT to install when I
-;; don't want it.
 (if (executable-find "editorconfig")
-    (setq editorconfig-available t)
-  (setq editorconfig-available nil))
-(use-package editorconfig
-  :if editorconfig-available
-  :no-require t
-  :disabled
-  :ensure)
+  (use-package editorconfig
+    :no-require t
+    :disabled
+    :ensure))
 
 (use-package terraform-mode
   :ensure
