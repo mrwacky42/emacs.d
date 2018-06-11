@@ -1,5 +1,5 @@
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer)
+  :bind ("C-x C-b" . ibuffer-jump)
   :config
   (fullframe ibuffer ibuffer-quit)
   (use-package ibuffer-vc
@@ -60,15 +60,7 @@
                (ibuffer-switch-to-saved-filter-groups "home")
                (ibuffer-vc-add-vc-filter-groups)
                (unless (eq ibuffer-sorting-mode 'filename/process)
-                 (ibuffer-do-sort-by-filename/process))))
-
-  (defadvice ibuffer (around ibuffer-point-to-most-recent)
-    "Open ibuffer with cursor pointed to most recent buffer name."
-    ()
-    (let ((recent-buffer-name (buffer-name)))
-      ad-do-it
-      (ibuffer-jump-to-buffer recent-buffer-name)))
-  (ad-activate 'ibuffer))
+                 (ibuffer-do-sort-by-filename/process)))))
 
 (provide 'init-ibuffer)
 ;;; init-ibuffer.el ends here
