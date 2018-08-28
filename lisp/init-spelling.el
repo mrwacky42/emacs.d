@@ -4,8 +4,14 @@
 
 (when (executable-find ispell-program-name)
   (use-package flyspell
+      :custom
+  (flyspell-abbrev-p t)
+  (flyspell-use-global-abbrev-table-p t)
+  (flyspell-issue-message-flag nil)
+  (flyspell-issue-welcome-flag nil)
     :init
     (use-package ispell
+      :custom (ispell-silently-savep t)
       ;; consider putting these in a launcher map instead.
       :bind (("C-c i c" . ispell-comments-and-strings)
              ("C-c i d" . ispell-change-dictionary)

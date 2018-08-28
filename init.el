@@ -80,6 +80,7 @@ you always store the package-selected-packages sorted."
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+(use-package delight :ensure t)
 (use-package diminish :ensure t)
 (use-package bind-key :ensure t)
 
@@ -104,6 +105,7 @@ you always store the package-selected-packages sorted."
 
 (setq column-number-mode t
       diff-switches "-u"
+      help-window-select t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t
       line-number-mode t
@@ -160,6 +162,55 @@ you always store the package-selected-packages sorted."
   :config
   (copy-as-format))
 
+(use-package eldoc
+  :diminish
+  :hook ((emacs-lisp-mode . turn-on-eldoc-mode)
+         (lisp-interaction-mode . turn-on-eldoc-mode)
+         (ielm-mode . turn-on-eldoc-mode)))
+
+(use-package elisp-mode
+  :delight emacs-lisp-mode "ξ")
+
+(use-package engine-mode ;; Bound to C-x / <key>
+  :ensure
+  :defer 3
+  :config
+  (defengine amazon
+    "http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias=aps&field-keywords=%s"
+    :keybinding "a")
+
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+
+  (defengine github
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "g")
+
+  (defengine google-images
+    "http://www.google.com/images?hl=en&source=hp&biw=1440&bih=795&gbv=2&aq=f&aqi=&aql=&oq=&q=%s"
+    :keybinding "i")
+
+  (defengine google-maps
+    "http://maps.google.com/maps?q=%s"
+    :keybinding "m"
+    :docstring "Mappin' it up.")
+
+  (defengine stack-overflow
+    "https://stackoverflow.com/search?q=%s"
+    :keybinding "s")
+
+  (defengine youtube
+    "http://www.youtube.com/results?aq=f&oq=&search_query=%s"
+    :keybinding "y")
+
+  (defengine wikipedia
+    "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+    :keybinding "w"
+    :docstring "Searchin' the wikis.")
+  (engine-mode t))
+
+
 (use-package epa
   :defer t
   :config
@@ -203,6 +254,10 @@ you always store the package-selected-packages sorted."
 (use-package fullframe
   :ensure
   :config (fullframe list-packages quit-window))
+
+(use-package holidays
+  :custom
+  (holiday-bahai-holidays nil))
 
 (use-package comment-dwim-2
   :ensure
@@ -443,8 +498,14 @@ you always store the package-selected-packages sorted."
     :config
     (progn
       (use-package async :ensure)
-      (paradox-enable)
-      (setq paradox-execute-asynchronously t))))
+      (paradox-enable))
+    :custom
+    (paradox-column-width-status 7)
+    (paradox-column-width-package 27)
+    (paradox-execute-asynchronously t)
+    (paradox-hide-wiki-packages t)
+    (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print)))
+
 
 (use-package update-dns)
 
@@ -459,6 +520,12 @@ you always store the package-selected-packages sorted."
             (setq calendar-latitude 33.99
                   calendar-longitude -118.42)))
                                         ;33.9921976,-118.4235076
+
+(use-package which-key
+  :ensure
+  :defer 0.2
+  :diminish
+  :config (which-key-mode))
 
 ;; s-q usually bound to save-buffers-kill-emacs.
 ;; What kind of person needs to quit emacs?

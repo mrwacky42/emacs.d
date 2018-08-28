@@ -161,7 +161,6 @@ comment as a filename."
               (unless (string-match "question" oddmuse-post)
                 (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
 
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
 
 (defun esk-remove-elc-on-save ()
