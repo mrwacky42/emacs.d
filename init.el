@@ -150,6 +150,14 @@ you always store the package-selected-packages sorted."
         beacon-blink-duration 1)
   (beacon-mode t))
 
+(use-package company
+  :defer t
+  :ensure
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config (setq company-idle-delay .3)
+;  :config (company-mode)
+  )
+
 (use-package copy-as-format
   :ensure
   :bind (("C-c w g" . copy-as-format-github)
@@ -350,7 +358,11 @@ you always store the package-selected-packages sorted."
   (add-hook 'terraform-mode-hook 'terraform-syntax-override)
   (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
   (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode)))
+  (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))
+  (use-package company-terraform
+               :ensure
+               :defer
+               (company-terraform-init)))
 
 
 (use-package ido
