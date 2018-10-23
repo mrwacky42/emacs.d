@@ -5,7 +5,7 @@
 
 (progn
   ;; Micro-optimization, I rarely use non-git anymore
-  (setq vc-handled-backends nil)
+  (setq vc-handled-backends '(Git))
 
   (use-package magit
     :ensure
