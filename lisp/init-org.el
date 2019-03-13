@@ -109,6 +109,7 @@
                ("^\\*+ \\(DONE\\) "
                 (1 (progn (compose-region (match-beginning 1) (match-end 1) "✔"))))))
   (add-to-list 'org-modules 'org-habit)
+  (require 'org-tempo)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
   ;; After #760 lands in yasnippet, we can try this
