@@ -671,7 +671,8 @@ This is an `:around' advice for `yas--make-control-overlay'."
 
 (use-package zop-to-char
   :ensure
-  :config (global-set-key [remap zap-to-char] 'zop-to-char))
+  :config
+  (global-set-key [remap zap-to-char] 'zop-up-to-char))
 
 (when (version< "24.4" emacs-version)
   (use-package paradox
