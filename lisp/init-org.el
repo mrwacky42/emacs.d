@@ -34,6 +34,7 @@
   (setq org-directory "~/info/orgfiles/")
   (setq
    org-agenda-files (list org-directory) ; default "~/.agenda_files"
+   org-agenda-restore-windows-after-quit t
    org-agenda-start-on-weekday nil
    org-blank-before-new-entry (quote ((heading . t)
                                       (plain-list-item . t)))
