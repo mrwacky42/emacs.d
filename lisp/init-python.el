@@ -11,8 +11,8 @@
   (delete 'elpy-module-highlight-indentation elpy-modules)
   (delete 'elpy-module-flymake elpy-modules)
 
-  (when (executable-find "ipython")
-    (setq python-shell-interpreter "ipython"
+  (when (executable-find "ipython3")
+    (setq python-shell-interpreter "ipython3"
           python-shell-interpreter-args "-i --simple-prompt")))
 
 (use-package jinja2-mode
