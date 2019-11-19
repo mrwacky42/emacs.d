@@ -703,6 +703,9 @@ This is an `:around' advice for `yas--make-control-overlay'."
                   calendar-longitude -118.42)))
                                         ;33.9921976,-118.4235076
 
+(use-package dockerfile-mode
+  :ensure)
+
 (use-package which-key
   :ensure
   :defer 0.2
