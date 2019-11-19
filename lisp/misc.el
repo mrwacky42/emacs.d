@@ -26,10 +26,11 @@ The optional NEW-WINDOW argument is not used.  It had better be Chrome or Chromi
   (interactive (browse-url-interactive-arg "URL: "))
   (start-process (concat "open " url " --incognito") nil "open" url))
 
-(cond (*is-a-mac* (setq browse-url-browser-function 'wacky/browse-url-default-macosx-browser))
-      (t (progn (setq browse-url-browser-function 'browse-url-generic)
-                (setq browse-url-generic-program "/opt/google/chrome/chrome"))))
-(setq browse-url-generic-args (list "--incognito"))
+(cond (*is-a-mac* (setq browse-url-browser-function 'wacky/browse-url-default-macosx-browser
+                        browse-url-generic-args (list "--incognito")))
+      (t (progn (setq browse-url-browser-function 'browse-url-firefox)
+                (setq browse-url-firefox-arguments (list "--private-window")))))
+
 
 ;; Indent with spaces instead of tabs
 ;(setq-default indent-tabs-mode nil)
