@@ -109,6 +109,12 @@
 (defun disable-show-trailing-whitespace ()
   (setq show-trailing-whitespace nil))
 
+(defun toggle-show-trailing-whitespace ()
+  "Toggle whether or not to show trailing whitespace."
+  (interactive)
+  (setq show-trailing-whitespace (not show-trailing-whitespace))
+  (message "Show trailing whitespace %s." (if show-trailing-whitespace "enabled" "disabled")))
+
 (defun wacky-tab-hook ()
   "A defun to use as a mode-hook to set tab-width."
   (setq tab-width 4))
