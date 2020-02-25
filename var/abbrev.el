@@ -29,6 +29,8 @@
   '(
    ))
 
+(define-abbrev-table 'calc-trail-mode-abbrev-table '())
+
 (define-abbrev-table 'calendar-mode-abbrev-table '())
 
 (define-abbrev-table 'change-log-mode-abbrev-table '())
@@ -67,6 +69,8 @@
 
 (define-abbrev-table 'diff-mode-abbrev-table '())
 
+(define-abbrev-table 'dockerfile-mode-abbrev-table '())
+
 (define-abbrev-table 'dsssl-mode-abbrev-table '())
 
 (define-abbrev-table 'edebug-eval-mode-abbrev-table '())
@@ -101,7 +105,23 @@
 
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
+(define-abbrev-table 'flycheck-error-message-mode-abbrev-table '())
+
 (define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-issue-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-notifications-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-post-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-pullreq-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-repository-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-topic-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-topic-mode-abbrev-table '())
 
 (define-abbrev-table 'fortran-mode-abbrev-table '())
 
@@ -123,20 +143,29 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("aler" "Al er" nil 0)
     ("alos" "also" nil 0)
+    ("becasue" "because" nil 0)
     ("beocmes" "becomes" nil 0)
     ("containter" "container" nil 0)
     ("depracated" "deprecated" nil 0)
-    ("githbu" "GitHub" nil 3)
-    ("github" "GitHub" nil 6)
-    ("isntance" "instance" nil 1)
-    ("jobz" "jobs" nil 4)
+    ("githbu" "github" nil 3)
+    ("github" "GitHub" nil 49)
+    ("improtant" "important" nil 0)
+    ("insetead" "instead" nil 0)
+    ("isntance" "instance" nil 2)
+    ("jobz" "jobs" nil 5)
+    ("kib" "Jib" nil 0)
     ("monnitor" "monitor" nil 0)
+    ("questionaire" "questionnaire" nil 0)
     ("recylcing" "recycling" nil 0)
     ("reserach" "research" nil 1)
+    ("variuos" "various" nil 0)
    ))
 
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())
+
+(define-abbrev-table 'go-dot-mod-mode-abbrev-table '())
 
 (define-abbrev-table 'go-mode-abbrev-table '())
 
@@ -172,9 +201,17 @@
 
 (define-abbrev-table 'json-mode-abbrev-table '())
 
+(define-abbrev-table 'ld-script-mode-abbrev-table '())
+
 (define-abbrev-table 'lisp-mode-abbrev-table '())
 
 (define-abbrev-table 'log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'lua-mode-abbrev-table '())
+
+(define-abbrev-table 'm2-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-cherry-mode-abbrev-table '())
 
@@ -199,6 +236,8 @@
 (define-abbrev-table 'magit-repolist-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-revision-mode-abbrev-table '())
+
+(define-abbrev-table 'magit-section-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-stash-mode-abbrev-table '())
 
@@ -308,6 +347,12 @@
 (define-abbrev-table 'texinfo-mode-abbrev-table '())
 
 (define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-project-errors-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-references-mode-abbrev-table '())
+
+(define-abbrev-table 'tide-server-list-mode-abbrev-table '())
 
 (define-abbrev-table 'typescript-mode-abbrev-table '())
 
