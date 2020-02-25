@@ -674,16 +674,15 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :config
   (global-set-key [remap zap-to-char] 'zop-up-to-char))
 
-(when (version< "24.4" emacs-version)
+(when (version> emacs-version "24.4")
   (use-package paradox
     :ensure
     :config
-    (progn
-      (use-package async :ensure)
-      (paradox-enable))
+    (use-package async :ensure)
+    (paradox-enable)
     :custom
-    (paradox-column-width-status 7)
-    (paradox-column-width-package 27)
+    (paradox-column-width-version 14)
+    (paradox-column-width-package 30)
     (paradox-execute-asynchronously t)
     (paradox-hide-wiki-packages t)
     (remove-hook 'paradox-after-execute-functions #'paradox--report-buffer-print)))

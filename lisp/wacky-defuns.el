@@ -113,4 +113,12 @@
   "A defun to use as a mode-hook to set tab-width."
   (setq tab-width 4))
 
+(defun version> (v1 v2)
+  "Return t if version V1 is higher (newer) than V2. Wrapper around version<"
+  (version< v2 v1))
+
+(defun version>= (v1 v2)
+  "Return t if version V1 is higher (newer) than or equal to V2. Wrapper around version<"
+  (version<= v2 v1))
+
 (provide 'wacky-defuns)
