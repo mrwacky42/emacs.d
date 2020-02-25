@@ -30,6 +30,9 @@
   (use-package org-habit)
   (use-package org-protocol)
   (use-package ox-gfm :ensure)
+  (use-package ox-reveal
+    :ensure t
+    :config (setq org-reveal-root "https://revealjs.com/"))
 
   (setq org-directory "~/info/orgfiles/")
   (setq
@@ -55,7 +58,7 @@
                                   "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
                                  ("n" "note" entry (file org-default-notes-file)
                                   "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-                                 ("j" "Journal" entry (file+datetree (concat org-directory "diary.org"))
+                                 ("j" "Journal" entry (file+olp+datetree "diary.org")
                                   "* %?\n%U\n" :clock-in t :clock-resume t)
                                  ("L" "org-capture" entry (file+headline
                                                            org-default-notes-file
@@ -68,7 +71,11 @@
                                  ("m" "Meeting" entry (file org-default-notes-file)
                                   "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
                                  ("h" "Habit" entry (file org-default-notes-file)
-                                  "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")))
+                                  "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+                                 ("s" "Code Snippet" entry
+                                  (file "snippets.org")
+                                  ;; Prompt for tags, title and language
+                                  "* %^{Title}\t%^g\n#+BEGIN_SRC %^{language|shell|elisp|python}\n%?\n#+END_SRC")))
 
    ;; org-capture Firefox plugin will not work if this is set.
    ;; I have been unable to figure out a context that works with the
