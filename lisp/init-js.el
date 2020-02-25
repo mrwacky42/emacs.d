@@ -18,5 +18,15 @@
             (lambda ()
               (push '("function" . ?λ) prettify-symbols-alist)))
 
+(use-package typescript-mode
+  :ensure)
+
+(use-package tide
+  :ensure
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
 (provide 'init-js)
 ;;; init-js.el ends here
