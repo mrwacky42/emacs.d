@@ -339,6 +339,8 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :config
   (copy-as-format))
 
+(use-package counsel-jq)
+
 (use-package eldoc
   :diminish
   :hook ((emacs-lisp-mode . turn-on-eldoc-mode)
@@ -424,6 +426,16 @@ This is an `:around' advice for `yas--make-control-overlay'."
 (use-package expand-region
   :ensure
   :bind ("C-=" . er/expand-region))
+
+(use-package lsp-mode
+  :ensure
+  :init (setq lsp-keymap-prefix "C-c C-l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (go-mode . lsp)
+         ;; (python-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 (use-package match-paren
   :bind ("%" . match-paren))
