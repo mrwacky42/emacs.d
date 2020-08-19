@@ -1,33 +1,44 @@
 ;; save a list of open files..
 (use-package desktop
   :init (desktop-save-mode)
-  :config (progn
-            (setq desktop-auto-save-timeout 600)
-            (dolist (mode '(magit-mode git-commit-mode ssh-config-mode))
-              (add-to-list 'desktop-modes-not-to-save mode))))
+  :config
+  (setq desktop-auto-save-timeout 600
+        desktop-restore-eager 10)
+  (dolist (mode '(magit-mode git-commit-mode ssh-config-mode))
+    (add-to-list 'desktop-modes-not-to-save mode)))
 
-(defadvice desktop-read (around trace-desktop-errors activate)
-  (let ((debug-on-error t))
-    ad-do-it))
+;; in emacs 27.1, advising desktop-read causes errors:
+;; Debugger entered--Lisp error: (wrong-number-of-arguments #f(compiled-function (ad--addoit-function dirname) #<bytecode 0x1fe9ba1c5a45>) 1)
+;;   ad-Advice-desktop-read(#f(compiled-function (dirname) "Read and process the desktop file in directory DIRNAME.\nLook for a desktop file in DIRNAME, or if DIRNAME is omitted, look in\ndirectories listed in `desktop-path'.  If a desktop file is found, it\nis processed and `desktop-after-read-hook' is run.  If no desktop file\nis found, clear the desktop and run `desktop-no-desktop-file-hook'.\nInteractively, with prefix arg \\[universal-argument], ask for DIRNAME.\nThis function is a no-op when Emacs is running in batch mode.\nIt returns t if a desktop file was loaded, nil otherwise." (interactive "i\nP") #<bytecode 0x1fe9ba1bb9c5>))
+;;   apply(ad-Advice-desktop-read #f(compiled-function (dirname) "Read and process the desktop file in directory DIRNAME.\nLook for a desktop file in DIRNAME, or if DIRNAME is omitted, look in\ndirectories listed in `desktop-path'.  If a desktop file is found, it\nis processed and `desktop-after-read-hook' is run.  If no desktop file\nis found, clear the desktop and run `desktop-no-desktop-file-hook'.\nInteractively, with prefix arg \\[universal-argument], ask for DIRNAME.\nThis function is a no-op when Emacs is running in batch mode.\nIt returns t if a desktop file was loaded, nil otherwise." (interactive "i\nP") #<bytecode 0x1fe9ba1bb9c5>) nil)
+;;   desktop-read()
+;;   #f(compiled-function () #<bytecode 0x1fe9ba1bcdfd>)()
+;;   run-hooks(after-init-hook delayed-warnings-hook)
+;;   command-line()
+;;   normal-top-level()
 
-(defadvice desktop-read (around time-restore activate)
-    (let ((start-time (current-time)))
-      (prog1
-          ad-do-it
-        (message "Desktop restored in %.2fms"
-                 (sanityinc/time-subtract-millis (current-time)
-                                                 start-time)))))
+;; (defadvice desktop-read (around trace-desktop-errors activate)
+;;   (let ((debug-on-error t))
+;;     ad-do-it))
 
-(defadvice desktop-create-buffer (around time-create activate)
-  (let ((start-time (current-time))
-        (filename (ad-get-arg 1)))
-    (prog1
-        ad-do-it
-      (message "Desktop: %.2fms to restore %s"
-               (sanityinc/time-subtract-millis (current-time)
-                                               start-time)
-               (when filename
-		 (abbreviate-file-name filename))))))
+;; (defadvice desktop-read (around time-restore activate)
+;;     (let ((start-time (current-time)))
+;;       (prog1
+;;           ad-do-it
+;;         (message "Desktop restored in %.2fms"
+;;                  (sanityinc/time-subtract-millis (current-time)
+;;                                                  start-time)))))
+
+;; (defadvice desktop-create-buffer (around time-create activate)
+;;   (let ((start-time (current-time))
+;;         (filename (ad-get-arg 1)))
+;;     (prog1
+;;         ad-do-it
+;;       (message "Desktop: %.2fms to restore %s"
+;;                (sanityinc/time-subtract-millis (current-time)
+;;                                                start-time)
+;;                (when filename
+;; 		 (abbreviate-file-name filename))))))
 
 ;;----------------------------------------------------------------------------
 ;; Restore histories and registers after saving

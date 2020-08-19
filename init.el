@@ -74,7 +74,9 @@ you always store the package-selected-packages sorted."
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/"))
 
 (setq package-enable-at-startup nil)
-(package-initialize)
+
+(when (< emacs-major-version 27)
+  (package-initialize))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -395,9 +397,12 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :config
   ;; Let Emacs query the passphrase through the minibuffer
   ;; Add 'allow-loopback-pinentry' to ~/.gnupg/gpg-agent.conf
-  (setq epa-pinentry-mode 'loopback)
+  (setq epg-pinentry-mode 'loopback)
   ;; Always replace encrypted text with plain text version
-  (setq epa-replace-original-text t))
+  (setq epa-replace-original-text t)
+  (require 'epa-file)
+  (epa-file-enable)
+  (setq-default epa-file-cache-passphrase-for-symmetric-encryption t))
 
 (use-package uniquify
   :config
