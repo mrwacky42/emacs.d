@@ -476,9 +476,9 @@ This is an `:around' advice for `yas--make-control-overlay'."
     "Register snippet-delete-trailing-whitespace as a before-save-hook in snippet-mode"
     (make-local-variable `before-save-hook)
     (add-hook 'before-save-hook `snippet-delete-trailing-whitespace))
-
   (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook)
   (use-package yasnippet-snippets :ensure)
+  (add-hook 'yas-minor-mode-hook (lambda () (yas-activate-extra-mode 'fundamental-mode)))
   (yas-global-mode 1))
 
 (use-package yaml-mode
