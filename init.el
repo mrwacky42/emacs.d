@@ -33,9 +33,9 @@
 (defun wacky/package-selected-packages-sorter (old-function &optional thing)
   "Use this as advice around package--save-selected-packages to ensure
 you always store the package-selected-packages sorted."
-  (let ((package-list (copy-seq (if thing
-                                    thing
-                                  package-selected-packages))))
+  (let ((package-list (cl-copy-seq (if thing
+                                       thing
+                                     package-selected-packages))))
     (funcall old-function (cl-sort package-list #'string-lessp))))
 
 (advice-add 'package--save-selected-packages :around #'wacky/package-selected-packages-sorter)
@@ -63,6 +63,7 @@ you always store the package-selected-packages sorted."
 (defconst *is-a-mac* (eq system-type 'darwin))
 
 (require 'package)
+(require 'cl-lib)
 
 
 ;;; Standard package repositories
@@ -131,7 +132,10 @@ you always store the package-selected-packages sorted."
 (require 'server)
 (unless (server-running-p)
   (server-start))
-(add-hook 'server-done-hook 'delete-frame)
+;; Emacs 27.1 says:
+;; Debugger entered--Lisp error: (error "Attempt to delete the sole visible or iconified fr...")
+;; (add-hook 'server-done-hook 'delete-frame)
+
 (add-hook 'server-done-hook (lambda nil (kill-buffer nil)))
 ;; (add-hook 'server-switch-hook (lambda nil
 ;;                                 (let ((server-buf (current-buffer)))
