@@ -247,7 +247,7 @@ you always store the package-selected-packages sorted."
   ;; Company appears to override our settings in `company-active-map'
   ;; based on `company-auto-complete-chars'. Turning it off ensures we
   ;; have full control.
-  (setq company-auto-complete-chars nil)
+  (setq company-auto-commit-chars nil)
 
   ;; Prevent Company completions from being lowercased in the
   ;; completion menu. This has only been observed to happen for
