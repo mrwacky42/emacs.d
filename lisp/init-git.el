@@ -5,7 +5,7 @@
 
 (progn
   ;; Micro-optimization, I rarely use non-git anymore
-  (setq vc-handled-backends '(Git))
+                                        ;(setq vc-handled-backends '(Git))
 
   (use-package magit
     :ensure
@@ -18,14 +18,20 @@
           magit-diff-refine-hunk t
           magit-process-popup-time 10
           magit-save-repository-buffers nil)
+    (when *is-a-mac* (setq magit-git-executable "/usr/local/bin/git"))
 
     ;; Re-center when moving forward in magit-diffs. This way
     ;; we always can see as much of the diff as possible.
     (defadvice magit-section-forward (after magit-section-forward-before-advice activate)
       (recenter-top-bottom 0))
 
+
     (use-package magit-svn
       :ensure))
+
+  (use-package forge
+    :ensure
+    :after magit)
 
   (use-package gist
     :ensure))
