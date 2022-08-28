@@ -1,10 +1,5 @@
-(defalias 'wacky/ibuffer-fn
-  (cond
-   ((< emacs-major-version 26) 'ibuffer)
-   (t 'ibuffer-jump)))
-
 (use-package ibuffer
-  :bind ("C-x C-b" . wacky/ibuffer-fn)
+  :bind ("C-x C-b" . ibuffer-jump)
   :config
   (fullframe ibuffer ibuffer-quit)
   (use-package ibuffer-vc
