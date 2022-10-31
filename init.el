@@ -397,7 +397,6 @@ This is an `:around' advice for `yas--make-control-overlay'."
 
 
 (use-package epa
-  :defer t
   :config
   ;; Let Emacs query the passphrase through the minibuffer
   ;; Add 'allow-loopback-pinentry' to ~/.gnupg/gpg-agent.conf
