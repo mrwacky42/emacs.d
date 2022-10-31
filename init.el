@@ -397,7 +397,6 @@ This is an `:around' advice for `yas--make-control-overlay'."
 
 
 (use-package epa
-  :defer t
   :config
   ;; Let Emacs query the passphrase through the minibuffer
   ;; Add 'allow-loopback-pinentry' to ~/.gnupg/gpg-agent.conf
@@ -508,7 +507,12 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :ensure)
 
 (use-package projectile
-  :ensure)
+  :ensure
+  :init (projectile-mode t)
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  :bind (("C-c C-p" . projectile-command-map))
+  )
 
 (use-package saveplace
   :config
