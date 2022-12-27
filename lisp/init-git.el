@@ -27,7 +27,8 @@
 
 
     (use-package magit-svn
-      :ensure))
+      :ensure
+      :disabled))
 
   (use-package forge
     :ensure
