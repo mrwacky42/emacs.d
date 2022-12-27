@@ -344,7 +344,8 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :config
   (copy-as-format))
 
-(use-package counsel-jq)
+(use-package counsel-jq
+  :ensure)
 
 (use-package eldoc
   :diminish
