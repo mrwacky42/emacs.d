@@ -13,6 +13,7 @@
    (when (fboundp mode)
      (funcall mode -1)))
  '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (setq initial-scratch-message ";;")
 
@@ -115,7 +116,8 @@ you always store the package-selected-packages sorted."
       require-final-newline t
       save-interprogram-paste-before-kill t
       sentence-end-double-space nil
-      shift-select-mode nil)
+      shift-select-mode nil
+      gnutls-verify-error t)
 
 
 
