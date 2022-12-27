@@ -16,12 +16,13 @@
 ;; When splitting window, show (other-buffer) in the new window
 ;;----------------------------------------------------------------------------
 (defun split-window-func-with-other-buffer (split-function)
-  (lexical-let ((s-f split-function))
+  (let ((s-f split-function))
     (lambda ()
       (interactive)
       (funcall s-f)
       (set-window-buffer (next-window) (other-buffer)))))
 
+(global-set-key "\C-x1" 'sanityinc/toggle-delete-other-windows)
 (global-set-key "\C-x2" (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key "\C-x3" (split-window-func-with-other-buffer 'split-window-horizontally))
 
@@ -32,8 +33,6 @@
            (equal (selected-window) (next-window)))
       (winner-undo)
     (delete-other-windows)))
-
-(global-set-key "\C-x1" 'sanityinc/toggle-delete-other-windows)
 
 ;;----------------------------------------------------------------------------
 ;; Rearrange split windows
