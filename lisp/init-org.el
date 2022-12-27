@@ -23,7 +23,7 @@
 
 (use-package org
   :ensure org-plus-contrib
-  :pin org
+  :pin nongnu
   :defer
   :config
   (use-package org-bullets :ensure)
