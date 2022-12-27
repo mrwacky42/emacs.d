@@ -30,15 +30,15 @@
   (use-package gist
     :ensure))
 
-(use-package gitignore-mode
-  :ensure)
-
-(use-package gitconfig-mode
+(use-package git-modes
   :ensure
-  :config (add-hook 'gitconfig-mode-hook
-                    (lambda () "Tabs are for heathens"
-                      (setq indent-tabs-mode nil
-                            tab-width 4))))
+  :config
+  (add-hook 'gitconfig-mode-hook
+            (lambda () "Tabs are for heathens"
+              (setq indent-tabs-mode nil
+                    tab-width 4)))
+  (add-to-list 'auto-mode-alist
+	       (cons "/.dockerignore\\'" 'gitignore-mode)))
 
 ;; Though see also vc-annotate's "n" & "p" bindings
 (use-package git-messenger
