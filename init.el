@@ -593,10 +593,10 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :ensure)
 
 (if (executable-find "editorconfig")
-  (use-package editorconfig
-    :no-require t
-    :disabled
-    :ensure))
+    (use-package editorconfig
+      :ensure t
+      :config
+      (editorconfig-mode 1)))
 
 (use-package terraform-mode
   :ensure
