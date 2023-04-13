@@ -44,6 +44,7 @@
             (lambda () "Tabs are for heathens"
               (setq indent-tabs-mode nil
                     tab-width 4)))
+  (setq git-commit-setup-hook (remove 'git-commit-turn-on-auto-fill git-commit-setup-hook))
   (add-to-list 'auto-mode-alist
 	       (cons "/.dockerignore\\'" 'gitignore-mode)))
 
