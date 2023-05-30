@@ -20,6 +20,9 @@
           magit-save-repository-buffers nil)
     (when *is-a-mac* (setq magit-git-executable "/usr/local/bin/git"))
 
+    ;; Disable auto-fill when committing because yuk.
+    (setq git-commit-setup-hook (remove 'git-commit-turn-on-auto-fill git-commit-setup-hook))
+
     ;; Re-center when moving forward in magit-diffs. This way
     ;; we always can see as much of the diff as possible.
     (defadvice magit-section-forward (after magit-section-forward-before-advice activate)
@@ -44,7 +47,6 @@
             (lambda () "Tabs are for heathens"
               (setq indent-tabs-mode nil
                     tab-width 4)))
-  (setq git-commit-setup-hook (remove 'git-commit-turn-on-auto-fill git-commit-setup-hook))
   (add-to-list 'auto-mode-alist
 	       (cons "/.dockerignore\\'" 'gitignore-mode)))
 
