@@ -483,6 +483,7 @@ This is an `:around' advice for `yas--make-control-overlay'."
     (add-hook 'before-save-hook `snippet-delete-trailing-whitespace))
   (add-hook 'snippet-mode-hook 'snippet-delete-trailing-whitespace-hook)
   (use-package yasnippet-snippets :ensure)
+  (use-package yasnippet-classic-snippets :ensure)
   (add-hook 'yas-minor-mode-hook (lambda () (yas-activate-extra-mode 'fundamental-mode)))
   (yas-global-mode 1))
 
