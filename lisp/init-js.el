@@ -4,6 +4,7 @@
 ;;; Code:
 
 ;; TODO: Verify eslint is available!
+;; TODO: Check to see if https://gist.github.com/deviantfero/45b9354b433f44450de51c827f63cc68 is insightful
 
 ;; disable jshint since we prefer eslint checking
 (setq-default flycheck-disabled-checkers
@@ -27,6 +28,15 @@
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
+
+(use-package prettier-js
+  :ensure
+  :config
+  (eval-after-load 'typescript-mode
+    '(progn
+       (add-hook 'typescript-mode-hook #'add-node-modules-path)
+       (add-hook 'typescript-mode-hook #'prettier-js-mode)))
+  )
 
 (provide 'init-js)
 ;;; init-js.el ends here
