@@ -1,4 +1,4 @@
-;;; misc --- do misc stuff
+;;; init-misc --- do misc stuff
 ;;; Commentary:
 
 
@@ -83,5 +83,5 @@ the start of the line."
 (global-set-key (kbd "M-SPC") 'cycle-spacing)
 
 
-(provide 'misc)
+(provide 'init-misc)
 ;;; misc.el ends here

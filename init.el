@@ -559,7 +559,7 @@ This is an `:around' advice for `yas--make-control-overlay'."
   :demand t
   :bind ("C-z" . maybe-suspend-frame))
 
-(use-package misc)
+(use-package init-misc)
 (use-package init-prelude)
 
 
