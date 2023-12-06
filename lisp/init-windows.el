@@ -15,16 +15,29 @@
 ;;----------------------------------------------------------------------------
 ;; When splitting window, show (other-buffer) in the new window
 ;;----------------------------------------------------------------------------
-(defun split-window-func-with-other-buffer (split-function)
-  (let ((s-f split-function))
-    (lambda ()
-      (interactive)
-      (funcall s-f)
-      (set-window-buffer (next-window) (other-buffer)))))
+;; (defun split-window-func-with-other-buffer (split-function)
+;;   (let ((s-f 'split-function))
+;;     (lambda ()
+;;       (interactive)
+;;       (funcall s-f)
+;;       (set-window-buffer (next-window) (other-buffer)))))
+
+
+;; Newer version from https://github.com/purcell/emacs.d/blob/a9e0eb8c79293954b1d9a9d74c869c14fbe2992c/lisp/init-windows.el#L60
+;; still doesn't work
+;; (defun split-window-func-with-other-buffer (split-function)
+;;   (lambda (&optional arg)
+;;     "Split this window and switch to the new window unless ARG is provided."
+;;     (interactive "P")
+;;     (funcall split-function)
+;;     (let ((target-window (next-window)))
+;;       (set-window-buffer target-window (other-buffer))
+;;       (unless arg
+;;         (select-window target-window)))))
 
 (global-set-key "\C-x1" 'sanityinc/toggle-delete-other-windows)
-(global-set-key "\C-x2" (split-window-func-with-other-buffer 'split-window-vertically))
-(global-set-key "\C-x3" (split-window-func-with-other-buffer 'split-window-horizontally))
+(global-set-key "\C-x2" 'split-window-vertically)
+(global-set-key "\C-x3" 'split-window-horizontally)
 
 (defun sanityinc/toggle-delete-other-windows ()
   "Delete other windows in frame if any, or restore previous window config."

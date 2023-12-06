@@ -8,6 +8,8 @@
 ;;; Code:
 
 
+;; (setq debug-on-error t)
+
 (mapc
  (lambda (mode)
    (when (fboundp mode)
@@ -63,6 +65,10 @@ you always store the package-selected-packages sorted."
 (defconst *spell-check-support-enabled* t)
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+(setq custom-file
+      (concat (expand-file-name user-emacs-directory) "custom.el"))
+(load custom-file :noerror :nomessage)
+
 (require 'package)
 (require 'cl-lib)
 
@@ -92,7 +98,8 @@ you always store the package-selected-packages sorted."
   :ensure
   :config
   (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))))
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  (no-littering-theme-backups))
 
 (setq load-prefer-newer t)
 
@@ -103,8 +110,8 @@ you always store the package-selected-packages sorted."
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
- vc-make-backup-files t
- version-control t)
+ vc-make-backup-files nil
+ version-control nil)
 
 (setq column-number-mode t
       diff-switches "-u"
@@ -120,11 +127,31 @@ you always store the package-selected-packages sorted."
       gnutls-verify-error t)
 
 
+;;(load-theme 'misterioso)
 
-(load-theme 'misterioso)
-(set-cursor-color "light gray")
+;;; For packaged versions which must use `require'.
+(use-package modus-themes
+  :ensure t
+  :config
+  ;; Add all your customizations prior to loading the themes
+
+  ;; (setq modus-themes-italic-constructs t
+  ;;       modus-themes-bold-constructs nil)
+
+  ;; ;; Maybe define some palette overrides, such as by using our presets
+  ;; (setq modus-themes-common-palette-overrides
+  ;;       modus-themes-preset-overrides-intense)
+  ;; (setq modus-vivendi-palette-overrides
+  ;;       '((bg-main "#1e242f")
+  ;;         ;;(bg-main "#2d3743")
+  ;;         ;;        (bg-dim "#2d3743")
+  ;;         ))
+  ;; Load the theme of your choice.
+  (load-theme 'modus-vivendi))
+
+;;(set-cursor-color "light gray")
 (blink-cursor-mode 1)
-(setq blink-cursor-interval .4)
+(setq blink-cursor-interval .6)
 
 
 ;;----------------------------------------------------------------------------
@@ -143,10 +170,6 @@ you always store the package-selected-packages sorted."
 ;;                                   (bury-buffer)
 ;;                                   (switch-to-buffer-other-frame server-buf))))
 
-
-(setq custom-file
-      (concat (expand-file-name user-emacs-directory) "custom.el"))
-(load custom-file :noerror :nomessage)
 
 
 ;; Packages
@@ -306,19 +329,19 @@ you always store the package-selected-packages sorted."
                  ;; dynamically decide which command we want to
                  ;; run when a key is pressed.
                  (define-key keymap event
-                   `(menu-item
-                     nil ,company-cmd :filter
-                     (lambda (cmd)
-                       ;; There doesn't seem to be any obvious
-                       ;; function from Company to tell whether or
-                       ;; not a completion is in progress (à la
-                       ;; `company-explicit-action-p'), so I just
-                       ;; check whether or not `company-my-keymap'
-                       ;; is defined, which seems to be good
-                       ;; enough.
-                       (if company-my-keymap
-                           ',company-cmd
-                         ',yas-cmd))))))
+                             `(menu-item
+                               nil ,company-cmd :filter
+                               (lambda (cmd)
+                                 ;; There doesn't seem to be any obvious
+                                 ;; function from Company to tell whether or
+                                 ;; not a completion is in progress (à la
+                                 ;; `company-explicit-action-p'), so I just
+                                 ;; check whether or not `company-my-keymap'
+                                 ;; is defined, which seems to be good
+                                 ;; enough.
+                                 (if company-my-keymap
+                                     ',company-cmd
+                                   ',yas-cmd))))))
              company-active-map)
             keymap))
 
@@ -539,7 +562,7 @@ This is an `:around' advice for `yas--make-control-overlay'."
   (recentf-mode 1)
   (setq recentf-max-saved-items 100
         recentf-exclude '("/tmp/" "/ssh:"))
-;  (add-to-list 'recentf-exclude "^/\\(?:ssh\\|su\\|sudo\\)?:")
+                                        ;  (add-to-list 'recentf-exclude "^/\\(?:ssh\\|su\\|sudo\\)?:")
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory))
 
@@ -565,15 +588,15 @@ This is an `:around' advice for `yas--make-control-overlay'."
 
 ;; Many of the init-* are modified parts of https://github.com/purcell/emacs.d
 ;; Others just follow this pattern.
-(when *is-a-mac*
-  (use-package init-fonts))
+(use-package init-fonts)
 (use-package init-git)
+
 (use-package init-go)
 (use-package init-gpg
   :config
   (setq epa-armor t
         epg-gpg-program "gpg"))
-(use-package init-ibuffer)
+                                        ;(use-package init-ibuffer)
 (use-package init-isearch)
 (use-package init-js)
 (use-package init-json)
@@ -612,9 +635,9 @@ This is an `:around' advice for `yas--make-control-overlay'."
   (add-to-list 'auto-mode-alist '("\\.tfstate\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.json.tftemplate\\'" . json-mode))
   (use-package company-terraform
-               :ensure
-               :defer
-               (company-terraform-init)))
+    :ensure
+    :defer
+    (company-terraform-init)))
 
 
 (use-package ido
@@ -658,9 +681,9 @@ This is an `:around' advice for `yas--make-control-overlay'."
   (add-hook 'dired-mode-hook
             (lambda ()
               (define-key dired-mode-map (kbd "<return>")
-                'dired-find-alternate-file) ; was dired-advertised-find-file
+                          'dired-find-alternate-file) ; was dired-advertised-find-file
               (define-key dired-mode-map (kbd "^")
-                (lambda () (interactive) (find-alternate-file "..")))))
+                          (lambda () (interactive) (find-alternate-file "..")))))
   )
                                         ; was dired-up-directory
 
@@ -685,12 +708,13 @@ This is an `:around' advice for `yas--make-control-overlay'."
 ;; (use-package flymake-cursor
 ;;   :ensure)
 
-(use-package smooth-scrolling
-  :ensure
-  :config (progn
-            (setq smooth-scroll-margin 5)
-            (setq scroll-conservatively 9999 ;; OVER 9000!
-                  scroll-preserve-screen-position t)))
+;; (use-package smooth-scrolling
+;;   :ensure
+;;   :config (progn
+;;             (setq smooth-scroll-margin 5)
+;;             (setq scroll-conservatively 9999 ;; OVER 9000!
+;;                   scroll-preserve-screen-position t)))
+(pixel-scroll-precision-mode)
 
 (use-package tramp
   :defer 5

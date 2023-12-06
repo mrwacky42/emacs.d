@@ -22,7 +22,7 @@
 ;;; Code:
 
 (use-package org
-  :ensure org-plus-contrib
+  :ensure ; org-plus-contrib
   :pin nongnu
   :defer
   :config

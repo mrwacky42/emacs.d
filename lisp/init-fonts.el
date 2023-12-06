@@ -55,7 +55,7 @@
             "Courier New")
           dynamic-fonts-preferred-monospace-point-size (pcase system-type
                                                          (`darwin 14)
-                                                         (_ 10))
+                                                         (_ 12))
           dynamic-fonts-preferred-proportional-fonts
           '(
             ;; Best, from
@@ -72,7 +72,7 @@
             "Arial")
           dynamic-fonts-preferred-proportional-point-size (pcase system-type
                                                             (`darwin 14)
-                                                            (_ 10)))
+                                                            (_ 12)))
 
     (dynamic-fonts-setup)))
 

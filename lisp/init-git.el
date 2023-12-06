@@ -36,9 +36,7 @@
   (use-package forge
     :ensure
     :after magit)
-
-  (use-package gist
-    :ensure))
+  )
 
 (use-package git-modes
   :ensure
